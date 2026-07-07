@@ -1,9 +1,9 @@
 import ApiError from "../utils/ApiError.js";
 
 const errorHandler = (err, req, res, next) => {
+
     let error = err;
 
-    // Convert unknown errors into ApiError
     if (!(error instanceof ApiError)) {
         error = new ApiError(
             error.statusCode || 500,
@@ -16,8 +16,7 @@ const errorHandler = (err, req, res, next) => {
         statusCode: error.statusCode,
         message: error.message,
         errors: error.errors || [],
-        stack:
-            process.env.NODE_ENV === "development" ? error.stack : undefined,
+        stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
     });
 };
 
