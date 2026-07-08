@@ -4,6 +4,7 @@ import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 
 import { updateProfileSchema } from "../validations/user.validation.js";
+import { userQuerySchema } from "../validations/query.validation.js";
 
 // Get logged-in user
 const getCurrentUser = asyncHandler(async (req, res) => {
@@ -55,4 +56,62 @@ const updateProfile = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updatedUser, "Profile updated successfully"));
 });
 
-export { getCurrentUser, updateProfile };
+const getAllUsers = asyncHandler(async (req, res) => {
+  const validationResult = userQuerySchema.safeParse(req.query);
+
+  if (!validationResult.success) {
+    throw new ApiError(
+      400,
+      "Invalid query parameters",
+      validationResult.error.issues,
+    );
+  }
+
+  const { page, limit, role, city, search, sortBy, order } = validationResult.data;
+
+  const filter = {};
+
+  if (role) {
+    filter.role = role;
+  }
+
+  if (city) {
+    filter.city = city;
+  }
+
+  if (search) {
+    filter.fullName = {
+      $regex: search,
+      $options: "i",
+    };
+  }
+
+  const skip = (page - 1) * limit;
+
+  const sort = {};
+
+  sort[sortBy] = order === "asc" ? 1 : -1;
+
+  const users = await User.find(filter)
+    .select("-password -refreshToken")
+    .sort(sort)
+    .skip(skip)
+    .limit(limit);
+
+  const totalUsers = await User.countDocuments(filter);
+
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        users,
+        totalUsers,
+        currentPage: page,
+        totalPages: Math.ceil(totalUsers / limit),
+      },
+      "Users fetched successfully",
+    ),
+  );
+});
+
+export { getCurrentUser, updateProfile, getAllUsers };
