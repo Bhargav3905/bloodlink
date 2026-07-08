@@ -1,10 +1,21 @@
 import { Router } from "express";
-import { registerUser, loginUser } from "../controllers/auth.controller.js";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  refreshAccessToken,
+} from "../controllers/auth.controller.js";
+import { authorizeRoles, verifyJWT } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
 router.post("/register", registerUser);
 
 router.post("/login", loginUser);
+
+// Protected
+router.post("/logout", verifyJWT, logoutUser);
+
+router.post("/refresh-token", refreshAccessToken);
 
 export default router;
