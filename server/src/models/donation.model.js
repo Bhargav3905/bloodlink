@@ -27,4 +27,6 @@ const donationSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
+donationSchema.index({ donor: 1 });
+
 export default mongoose.model("Donation", donationSchema);

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { GUJARAT_CITIES } from "../constants/index.js";
 
 const userQuerySchema = z.object({
   page: z.coerce.number().min(1).default(1),
@@ -7,7 +8,7 @@ const userQuerySchema = z.object({
 
   role: z.string().optional(),
 
-  city: z.string().optional(),
+  city: z.enum(GUJARAT_CITIES).optional(),
 
   search: z.string().trim().optional(),
 

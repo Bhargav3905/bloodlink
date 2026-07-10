@@ -4,7 +4,7 @@ import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 
 const getInventory = asyncHandler(async (req, res) => {
-  const inventory = await Inventory.find().sort({
+  const inventory = await Inventory.find().lean().sort({
     bloodGroup: 1,
   });
 

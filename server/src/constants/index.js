@@ -59,3 +59,5 @@ export const GUJARAT_CITIES = Object.freeze([
   "Himatnagar",
   "Palanpur",
 ]);
+
+export const DONATION_COOLDOWN_DAYS = 90;

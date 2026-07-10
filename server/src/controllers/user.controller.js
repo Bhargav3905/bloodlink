@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 import User from "../models/user.model.js";
+
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
+import sendEmail from "../utils/sendEmail.js";
 
 import { updateProfileSchema } from "../validations/user.validation.js";
 import { userQuerySchema } from "../validations/query.validation.js";
@@ -98,6 +100,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
   sort[sortBy] = order === "asc" ? 1 : -1;
 
   const users = await User.find(filter)
+    .lean()
     .select("-password -refreshToken")
     .sort(sort)
     .skip(skip)
@@ -127,6 +130,7 @@ const getPendingUsers = asyncHandler(async (req, res) => {
     isApproved: false,
     isActive: true,
   })
+    .lean()
     .select("-password -refreshToken")
     .sort({
       createdAt: -1,
@@ -214,13 +218,17 @@ const rejectUser = asyncHandler(async (req, res) => {
 
   await sendEmail({
     to: user.email,
-    subject: "BloodLink Account Approved",
+    subject: "BloodLink Registration Update",
     html: rejectionEmail(user.fullName),
   });
 
+  const rejectedUser = await User.findById(id).select(
+    "-password -refreshToken",
+  );
+
   return res
     .status(200)
-    .json(new ApiResponse(200, {}, "User rejected successfully"));
+    .json(new ApiResponse(200, rejectedUser, "User rejected successfully"));
 });
 
 export {

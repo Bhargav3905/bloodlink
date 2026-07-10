@@ -50,4 +50,8 @@ const requestSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
+requestSchema.index({ status: 1 });
+requestSchema.index({ bloodGroup: 1 });
+requestSchema.index({ requester: 1 });
+
 export default mongoose.model("Request", requestSchema);

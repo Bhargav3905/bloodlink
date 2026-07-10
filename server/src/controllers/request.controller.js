@@ -39,7 +39,7 @@ const createRequest = asyncHandler(async (req, res) => {
 
   const inventory = await Inventory.findOne({
     bloodGroup,
-  });
+  }).select("bloodGroup quantity");
 
   if (!inventory) {
     throw new ApiError(404, "Blood group inventory not found");
@@ -65,6 +65,7 @@ const getPendingRequests = asyncHandler(async (req, res) => {
   const requests = await Request.find({
     status: REQUEST_STATUS.PENDING,
   })
+    .lean()
     .populate("requester", "fullName email bloodGroup role city")
     .sort({ createdAt: -1 });
 
@@ -128,7 +129,7 @@ const completeRequest = asyncHandler(async (req, res) => {
 
   const inventory = await Inventory.findOne({
     bloodGroup: request.bloodGroup,
-  });
+  }).select("bloodGroup quantity");
 
   if (!inventory) {
     throw new ApiError(404, "Inventory not found");
@@ -140,12 +141,10 @@ const completeRequest = asyncHandler(async (req, res) => {
 
   inventory.quantity -= request.quantity;
 
-  await inventory.save();
-
   request.paymentStatus = true;
   request.status = REQUEST_STATUS.COMPLETED;
-
-  await request.save();
+  
+  await Promise.all([inventory.save(), request.save()]);
 
   return res
     .status(200)
@@ -154,4 +153,10 @@ const completeRequest = asyncHandler(async (req, res) => {
     );
 });
 
-export { createRequest, getPendingRequests, approveRequest, rejectRequest, completeRequest };
+export {
+  createRequest,
+  getPendingRequests,
+  approveRequest,
+  rejectRequest,
+  completeRequest,
+};

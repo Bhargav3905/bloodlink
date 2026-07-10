@@ -36,3 +36,12 @@ export const emergencyEmail = (hospital, bloodGroup, quantity) => `
 </ul>
 <p>Please respond immediately if available.</p>
 `;
+
+export const forgotPasswordEmail = (resetLink) => `
+<h2>Password Reset</h2>
+<p>Click below to reset your password.</p>
+<a href="${resetLink}">
+Reset Password
+</a>
+<p>This link expires in 15 minutes.</p>
+`;

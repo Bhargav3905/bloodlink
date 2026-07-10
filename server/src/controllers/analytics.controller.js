@@ -91,6 +91,7 @@ const getLowStockBlood = asyncHandler(async (req, res) => {
       $lte: Number(process.env.LOW_STOCK_THRESHOLD),
     },
   })
+    .lean()
     .select("-__v")
     .sort({
       quantity: 1,
@@ -142,7 +143,7 @@ const getRequestStatistics = asyncHandler(async (req, res) => {
     },
   ]);
 
-  const response = {
+  const requestStatistics = {
     pending: 0,
     paymentPending: 0,
     completed: 0,
@@ -151,13 +152,17 @@ const getRequestStatistics = asyncHandler(async (req, res) => {
   };
 
   stats.forEach((item) => {
-    response[item._id] = item.total;
+    requestStatistics[item._id] = item.total;
   });
 
   return res
     .status(200)
     .json(
-      new ApiResponse(200, response, "Request statistics fetched successfully"),
+      new ApiResponse(
+        200,
+        requestStatistics,
+        "Request statistics fetched successfully",
+      ),
     );
 });
 
@@ -165,6 +170,7 @@ const getDonationStatistics = asyncHandler(async (req, res) => {
   const totalDonations = await Donation.countDocuments();
 
   const recentDonations = await Donation.find()
+    .lean()
     .populate("donor", "fullName bloodGroup")
     .sort({
       createdAt: -1,
@@ -188,5 +194,5 @@ export {
   getLowStockBlood,
   getInventorySummary,
   getRequestStatistics,
-  getDonationStatistics
+  getDonationStatistics,
 };

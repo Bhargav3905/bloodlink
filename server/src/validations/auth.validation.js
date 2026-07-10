@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { BLOOD_GROUPS, GUJARAT_CITIES, USER_ROLES } from "../constants/index.js";
 
 const registerSchema = z.object({
   fullName: z.string().trim().min(3, "Full name must be at least 3 characters"),
@@ -18,11 +19,11 @@ const registerSchema = z.object({
 
   phone: z.string().regex(/^[6-9]\d{9}$/, "Invalid phone number"),
 
-  city: z.string(),
+  city: z.enum(GUJARAT_CITIES),
 
-  bloodGroup: z.string().optional(),
+  bloodGroup: z.enum(BLOOD_GROUPS).optional(),
 
-  role: z.string().optional(),
+  role: z.enum(Object.values(USER_ROLES)).optional(),
 });
 
 const loginSchema = z.object({

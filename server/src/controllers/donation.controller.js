@@ -1,5 +1,4 @@
 import Donation from "../models/donation.model.js";
-import User from "../models/user.model.js";
 import Inventory from "../models/inventory.model.js";
 
 import asyncHandler from "../utils/asyncHandler.js";
@@ -7,7 +6,7 @@ import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 
 import { donationSchema } from "../validations/donation.validation.js";
-import { USER_ROLES } from "../constants/index.js";
+import { USER_ROLES, DONATION_COOLDOWN_DAYS } from "../constants/index.js";
 
 const createDonation = asyncHandler(async (req, res) => {
   const validationResult = donationSchema.safeParse(req.body);
@@ -27,10 +26,11 @@ const createDonation = asyncHandler(async (req, res) => {
   const donationQuantity = user.role === USER_ROLES.DONOR ? 1 : quantity;
 
   if (user.role === USER_ROLES.DONOR && user.lastDonationDate) {
-    const cooldownDays = 90;
 
     const nextDonationDate = new Date(user.lastDonationDate);
-    nextDonationDate.setDate(nextDonationDate.getDate() + cooldownDays);
+    nextDonationDate.setDate(
+      nextDonationDate.getDate() + DONATION_COOLDOWN_DAYS,
+    );
 
     if (new Date() < nextDonationDate) {
       throw new ApiError(
@@ -78,6 +78,7 @@ const createDonation = asyncHandler(async (req, res) => {
 
 const getDonationHistory = asyncHandler(async (req, res) => {
   const donations = await Donation.find()
+    .lean()
     .populate("donor", "fullName email bloodGroup role city")
     .sort({
       createdAt: -1,

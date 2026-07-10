@@ -1,10 +1,12 @@
 import crypto from "crypto";
 import Request from "../models/request.model.js";
 import Inventory from "../models/inventory.model.js";
+import User from "../models/user.model.js";
 
 import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
+import sendEmail from "../utils/sendEmail.js";
 import razorpay from "../utils/razorpay.js";
 
 import { REQUEST_STATUS } from "../constants/index.js";
@@ -93,16 +95,14 @@ const verifyPayment = asyncHandler(async (req, res) => {
 
   inventory.quantity -= request.quantity;
 
-  await inventory.save();
-
   request.paymentStatus = true;
   request.razorpayOrderId = razorpay_order_id;
   request.razorpayPaymentId = razorpay_payment_id;
   request.status = REQUEST_STATUS.COMPLETED;
 
-  await request.save();
+  await Promise.all([inventory.save(), request.save()]);
 
-  const user = await User.findById(request.requester);
+  const user = await User.findById(request.requester).select("fullName email");
 
   await sendEmail({
     to: user.email,

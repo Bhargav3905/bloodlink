@@ -14,6 +14,7 @@ import {
   resetPasswordSchema,
 } from "../validations/auth.validation.js";
 import { USER_ROLES } from "../constants/index.js";
+import { forgotPasswordEmail } from "../templates/emailTemplate.js";
 
 const generateAccessAndRefreshTokens = async (userId) => {
   const user = await User.findById(userId);
@@ -226,19 +227,12 @@ const forgotPassword = asyncHandler(async (req, res) => {
     validateBeforeSave: false,
   });
 
-  const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+  const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
   await sendEmail({
     to: user.email,
     subject: "BloodLink Password Reset",
-    html: `
-      <h2>Password Reset</h2>
-      <p>Click the button below to reset your password.</p>
-      <a href="${resetUrl}">
-        Reset Password
-      </a>
-      <p>This link expires in 15 minutes.</p>
-    `,
+    html: forgotPasswordEmail(resetLink),
   });
 
   return res
@@ -271,7 +265,6 @@ const resetPassword = asyncHandler(async (req, res) => {
   user.password = password;
   user.resetPasswordToken = undefined;
   user.resetPasswordExpires = undefined;
-
   user.refreshToken = "";
 
   await user.save();
@@ -287,5 +280,5 @@ export {
   logoutUser,
   refreshAccessToken,
   forgotPassword,
-  resetPassword
+  resetPassword,
 };
