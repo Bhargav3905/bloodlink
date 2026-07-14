@@ -22,22 +22,20 @@ const LoginForm = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-  try {
-    const response = await authService.login(data);
-    const user = response.data.user;
-    login(user);
-    toast.success(response.message);
-    navigate(ROUTES.DASHBOARD);
-  } catch (error) {
-    toast.error(getApiError(error));
-  }
-};
+    try {
+      const response = await authService.login(data);
+      const user = response.data.user;
+      login(user);
+
+      toast.success(response.message);
+      navigate(ROUTES.DASHBOARD);
+    } catch (error) {
+      toast.error(getApiError(error));
+    }
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="mt-8 space-y-6"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
       <FormField
         label="Email Address"
         type="email"
@@ -78,20 +76,13 @@ const LoginForm = () => {
         </Link>
       </div>
 
-      <Button
-        type="submit"
-        fullWidth
-        loading={isSubmitting}
-      >
+      <Button type="submit" fullWidth loading={isSubmitting}>
         Sign In
       </Button>
 
       <p className="text-center text-sm text-slate-500">
         Don't have an account?{' '}
-        <Link
-          to={ROUTES.REGISTER}
-          className="font-semibold text-red-600 hover:underline"
-        >
+        <Link to={ROUTES.REGISTER} className="font-semibold text-red-600 hover:underline">
           Register
         </Link>
       </p>

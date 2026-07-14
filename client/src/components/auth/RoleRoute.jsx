@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { PageLoader } from '../feedback/loader';
 
 import { ROUTES } from '../../constants/routes';
+import { ROLES } from '../../constants/roles';
 
 const RoleRoute = ({ allowedRoles = [] }) => {
   const { user, loading } = useAuth();
@@ -17,7 +18,19 @@ const RoleRoute = ({ allowedRoles = [] }) => {
   }
 
   if (!allowedRoles.includes(user.role)) {
-    return <Navigate to={ROUTES.DASHBOARD} replace />;
+    switch (user.role) {
+      case ROLES.ADMIN:
+        return <Navigate to={ROUTES.ADMIN_DASHBOARD} replace />;
+
+      case ROLES.HOSPITAL:
+        return <Navigate to={ROUTES.HOSPITAL_DASHBOARD} replace />;
+
+      case ROLES.DONOR:
+        return <Navigate to={ROUTES.DONOR_DASHBOARD} replace />;
+
+      default:
+        return <Navigate to={ROUTES.PATIENT_DASHBOARD} replace />;
+    }
   }
 
   return <Outlet />;

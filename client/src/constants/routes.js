@@ -6,19 +6,13 @@ export const ROUTES = {
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password/:token',
 
-  // Common
+  // Dashboard
   DASHBOARD: '/dashboard',
-  PROFILE: '/profile',
 
   // Features
+  PROFILE: '/profile',
   DONATIONS: '/donations',
   REQUESTS: '/requests',
   INVENTORY: '/inventory',
   ANALYTICS: '/analytics',
-
-  // Role Dashboards (temporary)
-  ADMIN_DASHBOARD: '/dashboard',
-  HOSPITAL_DASHBOARD: '/dashboard',
-  DONOR_DASHBOARD: '/dashboard',
-  PATIENT_DASHBOARD: '/dashboard',
 };
