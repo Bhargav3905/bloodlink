@@ -24,6 +24,11 @@ export const SIDEBAR_ITEMS = {
       path: ROUTES.ADMIN_USERS,
     },
     {
+      label: 'Donations',
+      icon: Heart,
+      path: ROUTES.ADMIN_DONATIONS,
+    },
+    {
       label: 'Inventory',
       icon: Package,
       path: ROUTES.ADMIN_INVENTORY,
@@ -91,6 +96,11 @@ export const SIDEBAR_ITEMS = {
       label: 'Dashboard',
       icon: LayoutDashboard,
       path: ROUTES.HOSPITAL_DASHBOARD,
+    },
+    {
+      label: 'Donate Blood',
+      icon: Heart,
+      path: ROUTES.DONOR_DONATIONS,
     },
     {
       label: 'Inventory',
