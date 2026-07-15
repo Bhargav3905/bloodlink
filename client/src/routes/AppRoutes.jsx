@@ -9,10 +9,14 @@ import Register from '../features/auth/pages/Register';
 import ForgotPassword from '../features/auth/pages/ForgotPassword';
 import ResetPassword from '../features/auth/pages/ResetPassword';
 
+import Users from '../features/users/pages/Users';
+
 import GuestRoute from '../components/auth/GuestRoute';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
+import RoleRoute from '../components/auth/RoleRoute';
 
 import { ROUTES } from '../constants/routes';
+import { ROLES } from '../constants/roles';
 
 const AppRoutes = () => {
   return (
@@ -29,6 +33,10 @@ const AppRoutes = () => {
       <Route element={<ProtectedRoute />}>
         <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
+
+        <Route element={<RoleRoute allowedRoles={[ROLES.ADMIN]} />}>
+          <Route path={ROUTES.ADMIN_USERS} element={<Users />} />
+        </Route>
       </Route>
     </Routes>
   );

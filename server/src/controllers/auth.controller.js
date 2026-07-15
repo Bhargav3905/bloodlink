@@ -88,7 +88,7 @@ const loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw new ApiError(404, "User not found");
+    throw new ApiError(404, "No account found. Please register to continue.");
   }
 
   // Verify password
@@ -103,11 +103,7 @@ const loginUser = asyncHandler(async (req, res) => {
     (user.role === USER_ROLES.DONOR || user.role === USER_ROLES.HOSPITAL) &&
     !user.isApproved
   ) {
-    throw new ApiError(403, "Your account is awaiting admin approval");
-  }
-
-  if (!user.isActive) {
-    throw new ApiError(403, "Your account has been rejected");
+    throw new ApiError(403, "Your account is awaiting admin approval.");
   }
 
   const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
@@ -195,7 +191,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       new ApiResponse(
         200,
         {
-          accessToken, user: loggedInUser,
+          accessToken,
+          user: loggedInUser,
         },
         "Access token refreshed successfully",
       ),

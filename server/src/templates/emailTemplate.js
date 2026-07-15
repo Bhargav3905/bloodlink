@@ -8,10 +8,11 @@ export const approvalEmail = (name) => `
 `;
 
 export const rejectionEmail = (name) => `
-<h2>BloodLink Account Update</h2>
+<h2>BloodLink Registration Update</h2>
 <p>Hello <strong>${name}</strong>,</p>
-<p>Unfortunately your registration could not be approved.</p>
-<p>If you believe this is a mistake, please contact support.</p>
+<p>Your registration could not be approved at this time.</p>
+<p>You may register again after correcting your information.</p>
+<p>If you believe this was a mistake, please contact the administrator.</p>
 <hr>
 <p>BloodLink Team</p>
 `;

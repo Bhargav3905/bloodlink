@@ -206,29 +206,18 @@ const rejectUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Approved users cannot be rejected");
   }
 
-  if (!user.isActive) {
-    throw new ApiError(400, "User already rejected");
-  }
-
-  user.isActive = false;
-
-  await user.save({
-    validateBeforeSave: false,
-  });
-
   await sendEmail({
     to: user.email,
     subject: "BloodLink Registration Update",
     html: rejectionEmail(user.fullName),
   });
 
-  const rejectedUser = await User.findById(id).select(
-    "-password -refreshToken",
-  );
+  // Remove rejected registration
+  await User.findByIdAndDelete(user._id);
 
   return res
     .status(200)
-    .json(new ApiResponse(200, rejectedUser, "User rejected successfully"));
+    .json(new ApiResponse(200, {}, "User rejected and removed successfully"));
 });
 
 export {

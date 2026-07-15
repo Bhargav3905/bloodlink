@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { useAuth } from '../../contexts/AuthContext';
-import { PageLoader } from '../feedback/loader';
 
 import { ROUTES } from '../../constants/routes';
 import { ROLES } from '../../constants/roles';
+import PageLoader from '../feedback/loader/PageLoader';
 
 const RoleRoute = ({ allowedRoles = [] }) => {
   const { user, loading } = useAuth();
