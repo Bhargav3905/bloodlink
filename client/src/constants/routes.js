@@ -9,11 +9,11 @@ export const ROUTES = {
   // Common
   DASHBOARD: '/dashboard',
   PROFILE: '/profile',
+  INVENTORY: '/inventory',  // Admin - Hospital
 
   // Admin
   ADMIN_DASHBOARD: '/dashboard',
   ADMIN_USERS: '/admin/users',
-  ADMIN_INVENTORY: '/admin/inventory',
   ADMIN_REQUESTS: '/admin/requests',
   ADMIN_ANALYTICS: '/admin/analytics',
   DONATIONS: '/donations',
@@ -29,6 +29,5 @@ export const ROUTES = {
 
   // Hospital
   HOSPITAL_DASHBOARD: '/dashboard',
-  HOSPITAL_INVENTORY: '/hospital/inventory',
   HOSPITAL_REQUESTS: '/hospital/requests',
 };

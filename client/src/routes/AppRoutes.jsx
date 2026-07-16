@@ -11,6 +11,7 @@ import ResetPassword from '../features/auth/pages/ResetPassword';
 import Users from '../features/users/pages/Users';
 import DonateBlood from '../features/donations/pages/DonateBlood';
 import DonationHistory from '../features/donations/pages/DonationHistory';
+import InventoryPage from '../features/inventory/pages/InventoryPage';
 
 import GuestRoute from '../components/auth/GuestRoute';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
@@ -34,6 +35,7 @@ const AppRoutes = () => {
       <Route element={<ProtectedRoute />}>
         <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.PROFILE} element={<Profile />} />
+        <Route path={ROUTES.INVENTORY} element={<InventoryPage />} />
 
         <Route element={<RoleRoute allowedRoles={[ROLES.ADMIN]} />}>
           <Route path={ROUTES.ADMIN_USERS} element={<Users />} />

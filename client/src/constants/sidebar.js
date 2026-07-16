@@ -31,7 +31,7 @@ export const SIDEBAR_ITEMS = {
     {
       label: 'Inventory',
       icon: Package,
-      path: ROUTES.ADMIN_INVENTORY,
+      path: ROUTES.INVENTORY,
     },
     {
       label: 'Requests',
@@ -57,14 +57,14 @@ export const SIDEBAR_ITEMS = {
       path: ROUTES.DONOR_DASHBOARD,
     },
     {
+      label: 'Inventory',
+      icon: Package,
+      path: ROUTES.INVENTORY,
+    },
+    {
       label: 'Donate Blood',
       icon: Heart,
       path: ROUTES.DONOR_DONATIONS,
-    },
-    {
-      label: 'Donation History',
-      icon: ClipboardList,
-      path: ROUTES.DONOR_HISTORY,
     },
     {
       label: 'Profile',
@@ -78,6 +78,11 @@ export const SIDEBAR_ITEMS = {
       label: 'Dashboard',
       icon: LayoutDashboard,
       path: ROUTES.PATIENT_DASHBOARD,
+    },
+    {
+      label: 'Inventory',
+      icon: Package,
+      path: ROUTES.INVENTORY,
     },
     {
       label: 'Blood Requests',
@@ -105,7 +110,7 @@ export const SIDEBAR_ITEMS = {
     {
       label: 'Inventory',
       icon: Package,
-      path: ROUTES.HOSPITAL_INVENTORY,
+      path: ROUTES.INVENTORY,
     },
     {
       label: 'Blood Requests',
