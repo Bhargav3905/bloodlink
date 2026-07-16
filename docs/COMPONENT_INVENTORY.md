@@ -291,15 +291,12 @@ Mobile Card View
 
 Reusable Widgets
 
-ChartCard
 
 SummaryCard
 
 QuickActionCard
 
 ActivityCard
-
-DashboardSection
 
 ---
 
@@ -543,7 +540,6 @@ feedback/
 
 charts/
 
-* ChartCard
 * InventoryChart
 * DonationChart
 
