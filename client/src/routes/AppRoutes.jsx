@@ -37,7 +37,7 @@ const AppRoutes = () => {
 
         <Route element={<RoleRoute allowedRoles={[ROLES.ADMIN]} />}>
           <Route path={ROUTES.ADMIN_USERS} element={<Users />} />
-          <Route path={ROUTES.ADMIN_DONATIONS} element={<DonationHistory />} />
+          <Route path={ROUTES.DONATIONS} element={<DonationHistory />} />
         </Route>
 
         <Route element={<RoleRoute allowedRoles={[ROLES.DONOR, ROLES.HOSPITAL]} />}>

@@ -16,7 +16,7 @@ export const ROUTES = {
   ADMIN_INVENTORY: '/admin/inventory',
   ADMIN_REQUESTS: '/admin/requests',
   ADMIN_ANALYTICS: '/admin/analytics',
-  ADMIN_DONATIONS: '/admin/donations',
+  DONATIONS: '/donations',
 
   // Donor
   DONOR_DASHBOARD: '/dashboard',

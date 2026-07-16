@@ -26,7 +26,7 @@ export const SIDEBAR_ITEMS = {
     {
       label: 'Donations',
       icon: Heart,
-      path: ROUTES.ADMIN_DONATIONS,
+      path: ROUTES.DONATIONS,
     },
     {
       label: 'Inventory',
