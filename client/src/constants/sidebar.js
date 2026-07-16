@@ -19,7 +19,7 @@ export const SIDEBAR_ITEMS = {
       path: ROUTES.ADMIN_DASHBOARD,
     },
     {
-      label: 'Users',
+      label: 'Pending Users',
       icon: Users,
       path: ROUTES.ADMIN_USERS,
     },
