@@ -12,7 +12,7 @@ import EmptyState from '../../../components/feedback/empty-state/EmptyState';
 import inventoryService from '../services/inventory.service';
 import adminService from '../../admin/services/admin.service';
 
-import { useAuth } from '../../../contexts/AuthContext';
+import useAuth from '../../../hooks/useAuth';
 import { ROLES } from '../../../constants/roles';
 
 import getApiError from '../../../utils/apiError';

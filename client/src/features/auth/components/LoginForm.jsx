@@ -9,7 +9,7 @@ import authService from '../services/auth.service';
 import getApiError from '../../../utils/apiError';
 
 import { ROUTES } from '../../../constants/routes';
-import { useAuth } from '../../../contexts/AuthContext';
+import useAuth from '../../../hooks/useAuth';
 
 const LoginForm = () => {
   const navigate = useNavigate();

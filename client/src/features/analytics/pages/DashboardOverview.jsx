@@ -37,10 +37,7 @@ const DashboardOverview = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    void fetchDashboard();
-  }, []);
-
+  
   const fetchDashboard = async () => {
     try {
       setRefreshing(true);
@@ -60,7 +57,7 @@ const DashboardOverview = () => {
         analyticsService.getDonationStatistics(),
         analyticsService.getLowStock(),
       ]);
-
+      
       setOverview(overviewResponse.data);
       setInventorySummary(inventoryResponse.data);
       setBloodDistribution(distributionResponse.data);
@@ -76,6 +73,10 @@ const DashboardOverview = () => {
       setRefreshing(false);
     }
   };
+  
+  useEffect(() => {
+    void fetchDashboard();
+  }, []);
 
   if (loading) {
     return <SkeletonDashboard />;

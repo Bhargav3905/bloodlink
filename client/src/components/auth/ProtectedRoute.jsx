@@ -1,7 +1,9 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 import { ROUTES } from '../../constants/routes';
-import { useAuth } from '../../contexts/AuthContext';
+
+import useAuth from '../../hooks/useAuth';
+
 import PageLoader from '../feedback/loader/PageLoader';
 
 const ProtectedRoute = () => {

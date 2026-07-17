@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from '../../../contexts/AuthContext';
+import useAuth from '../../../hooks/useAuth';
 
 import ThemeToggle from '../../shared/theme-toggle/ThemeToggle';
+
 import Button from '../../ui/button/Button';
 
 import { ROUTES } from '../../../constants/routes';

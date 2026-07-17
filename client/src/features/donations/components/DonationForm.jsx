@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { useAuth } from '../../../contexts/AuthContext';
+import useAuth from '../../../hooks/useAuth';
 
 import Card from '../../../components/ui/card/Card';
 import CardContent from '../../../components/ui/card/CardContent';

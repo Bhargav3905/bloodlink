@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import { useAuth } from '../../../contexts/AuthContext';
+import useAuth from '../../../hooks/useAuth';
 
 import FormField from '../../../components/ui/input/FormField';
 import Button from '../../../components/ui/button/Button';
