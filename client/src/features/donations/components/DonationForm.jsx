@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { Droplets, HeartHandshake, Building2, Info } from 'lucide-react';
 
 import useAuth from '../../../hooks/useAuth';
 
@@ -37,6 +38,7 @@ const DonationForm = () => {
       };
 
       const response = await donationService.createDonation(payload);
+
       toast.success(response.message);
 
       reset({
@@ -49,36 +51,48 @@ const DonationForm = () => {
   };
 
   return (
-    <Card className="max-w-2xl">
-      <CardHeader>
-        <CardTitle>Donation Details</CardTitle>
+    <Card className="mx-auto max-w-3xl rounded-3xl border border-slate-200 shadow-sm dark:border-slate-800">
+      <CardHeader className="border-b border-slate-200 dark:border-slate-800">
+        <CardTitle className="flex items-center gap-3 text-2xl">
+          <HeartHandshake className="text-red-600" size={26} />
+          Donation Details
+        </CardTitle>
+
+        <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+          Verify your registered details before recording a blood donation.
+        </p>
       </CardHeader>
 
-      <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <CardContent className="p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
           <div className="grid gap-6 md:grid-cols-2">
-            <div>
-              <label className="mb-2 block text-sm font-medium">Registered Blood Group</label>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900/50">
+              <div className="mb-3 flex items-center gap-2 text-red-600">
+                <Droplets size={18} />
+                <span className="text-sm font-semibold">Registered Blood Group</span>
+              </div>
 
               <input
                 value={user?.bloodGroup}
                 disabled
-                className="h-11 w-full rounded-xl border border-slate-300 bg-slate-100 px-4 dark:border-slate-700 dark:bg-slate-800"
+                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-4 font-medium dark:border-slate-700 dark:bg-slate-900"
               />
             </div>
 
-            <div>
-              <label className="mb-2 block text-sm font-medium">Role</label>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900/50">
+              <div className="mb-3 flex items-center gap-2 text-red-600">
+                <Building2 size={18} />
+                <span className="text-sm font-semibold">Account Role</span>
+              </div>
 
               <input
                 value={user?.role?.charAt(0).toUpperCase() + user?.role?.slice(1)}
                 disabled
-                className="h-11 w-full rounded-xl border border-slate-300 bg-slate-100 px-4 dark:border-slate-700 dark:bg-slate-800"
+                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-4 font-medium dark:border-slate-700 dark:bg-slate-900"
               />
             </div>
           </div>
 
-          {/* Hidden field submitted to backend */}
           <input type="hidden" value={user?.bloodGroup} {...register('bloodGroup')} />
 
           <FormField
@@ -91,12 +105,10 @@ const DonationForm = () => {
             required={user?.role === 'hospital'}
             rules={{
               required: user?.role === 'hospital' ? 'Quantity is required' : false,
-
               min: {
                 value: 1,
                 message: 'Minimum quantity is 1',
               },
-
               max: {
                 value: 10,
                 message: 'Maximum 10 units allowed',
@@ -105,21 +117,32 @@ const DonationForm = () => {
           />
 
           {user?.role === 'donor' && (
-            <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-700 dark:border-blue-900 dark:bg-blue-950/30 dark:text-blue-300">
-              Donors can donate only <strong>1 blood unit</strong> every <strong>90 days</strong>.
+            <div className="flex items-start gap-3 rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-900 dark:bg-blue-950/30">
+              <Info size={20} className="mt-0.5 shrink-0 text-blue-600" />
+
+              <p className="text-sm leading-7 text-blue-700 dark:text-blue-300">
+                Donors can donate only <strong>1 blood unit</strong> every <strong>90 days</strong>{' '}
+                to ensure safe and healthy blood donation.
+              </p>
             </div>
           )}
 
           {user?.role === 'hospital' && (
-            <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700 dark:border-emerald-900 dark:bg-emerald-950/30 dark:text-emerald-300">
-              Hospitals can donate between <strong>1 and 10 blood units</strong> of their registered
-              blood group in a single donation.
+            <div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-900 dark:bg-emerald-950/30">
+              <Info size={20} className="mt-0.5 shrink-0 text-emerald-600" />
+
+              <p className="text-sm leading-7 text-emerald-700 dark:text-emerald-300">
+                Hospitals can donate between <strong>1 and 10 blood units</strong> of their
+                registered blood group in a single donation.
+              </p>
             </div>
           )}
 
-          <Button type="submit" loading={isSubmitting}>
-            Record Donation
-          </Button>
+          <div className="flex justify-end border-t border-slate-200 pt-6 dark:border-slate-800">
+            <Button type="submit" loading={isSubmitting} className="min-w-44">
+              Record Donation
+            </Button>
+          </div>
         </form>
       </CardContent>
     </Card>

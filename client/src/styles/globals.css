@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Enable class-based dark mode */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -19,4 +19,33 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Better text selection */
+::selection {
+  background: rgb(220 38 38 / 18%);
+  color: rgb(185 28 28);
+}
+
+.dark ::selection {
+  background: rgb(239 68 68 / 28%);
+  color: white;
+}
+
+/* Smooth keyboard accessibility */
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(239 68 68 / 18%);
+}
+
+/* Chrome Autofill Fix */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: inherit;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 9999s ease-in-out 0s;
 }

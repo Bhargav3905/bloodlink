@@ -1,12 +1,14 @@
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { AuthProvider } from '../contexts/AuthContext';
+import SidebarProvider from '../providers/SidebarProvider';
 
 import { Toaster } from 'react-hot-toast';
 
 const AppProviders = ({ children }) => {
   return (
     <ThemeProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <SidebarProvider>
           {children}
 
           <Toaster
@@ -17,7 +19,8 @@ const AppProviders = ({ children }) => {
               duration: 3000,
             }}
           />
-        </AuthProvider>
+        </SidebarProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 };

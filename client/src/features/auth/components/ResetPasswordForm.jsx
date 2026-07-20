@@ -39,11 +39,12 @@ const ResetPasswordForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-10 space-y-6">
       <FormField
         label="New Password"
         type="password"
         name="password"
+        placeholder="Enter your new password"
         register={register}
         required
         error={errors.password}
@@ -60,6 +61,7 @@ const ResetPasswordForm = () => {
         label="Confirm Password"
         type="password"
         name="confirmPassword"
+        placeholder="Confirm your new password"
         register={register}
         required
         error={errors.confirmPassword}
@@ -69,7 +71,7 @@ const ResetPasswordForm = () => {
         }}
       />
 
-      <Button type="submit" fullWidth loading={isSubmitting}>
+      <Button type="submit" fullWidth loading={isSubmitting} className="h-12">
         Reset Password
       </Button>
     </form>

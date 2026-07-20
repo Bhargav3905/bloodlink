@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, useWatch } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import Button from '../../../components/ui/button/Button';
 import FormField from '../../../components/ui/input/FormField';
@@ -8,9 +9,6 @@ import { bloodGroupOptions } from '../../../constants/bloodGroups';
 import { cityOptions } from '../../../constants/cities';
 import { roleOptions } from '../../../constants/roles';
 import { ROUTES } from '../../../constants/routes';
-
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
 
 import authService from '../services/auth.service';
 import getApiError from '../../../utils/apiError';
@@ -23,15 +21,16 @@ const RegisterForm = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const password = useWatch({ control, name: 'password' });
+  const password = useWatch({
+    control,
+    name: 'password',
+  });
 
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
-      const { ...payload } = data;
-
-      const response = await authService.register(payload);
+      const response = await authService.register(data);
 
       toast.success(response.message);
 
@@ -42,13 +41,13 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-10 space-y-5">
       <FormField
         label="Full Name"
         name="fullName"
         register={register}
-        required
         placeholder="Enter your full name"
+        required
         error={errors.fullName}
         rules={{
           required: 'Full name is required',
@@ -60,8 +59,8 @@ const RegisterForm = () => {
         type="email"
         name="email"
         register={register}
-        required
         placeholder="Enter your email"
+        required
         error={errors.email}
         rules={{
           required: 'Email is required',
@@ -72,8 +71,8 @@ const RegisterForm = () => {
         label="Phone Number"
         name="phone"
         register={register}
+        placeholder="Enter your phone number"
         required
-        placeholder="Enter phone number"
         error={errors.phone}
         rules={{
           required: 'Phone number is required',
@@ -85,9 +84,9 @@ const RegisterForm = () => {
         type="select"
         name="city"
         register={register}
+        options={cityOptions}
         required
         error={errors.city}
-        options={cityOptions}
         rules={{
           required: 'City is required',
         }}
@@ -98,9 +97,9 @@ const RegisterForm = () => {
         type="select"
         name="bloodGroup"
         register={register}
+        options={bloodGroupOptions}
         required
         error={errors.bloodGroup}
-        options={bloodGroupOptions}
         rules={{
           required: 'Blood group is required',
         }}
@@ -111,9 +110,9 @@ const RegisterForm = () => {
         type="select"
         name="role"
         register={register}
+        options={roleOptions}
         required
         error={errors.role}
-        options={roleOptions}
         rules={{
           required: 'Role is required',
         }}
@@ -124,8 +123,8 @@ const RegisterForm = () => {
         type="password"
         name="password"
         register={register}
+        placeholder="Create a password"
         required
-        placeholder="Enter password"
         error={errors.password}
         rules={{
           required: 'Password is required',
@@ -141,8 +140,8 @@ const RegisterForm = () => {
         type="password"
         name="confirmPassword"
         register={register}
+        placeholder="Confirm your password"
         required
-        placeholder="Confirm password"
         error={errors.confirmPassword}
         rules={{
           required: 'Please confirm your password',
@@ -150,13 +149,28 @@ const RegisterForm = () => {
         }}
       />
 
-      <Button type="submit" fullWidth loading={isSubmitting}>
+      <Button type="submit" fullWidth loading={isSubmitting} className="h-12">
         Create Account
       </Button>
 
-      <p className="text-center text-sm text-slate-500">
+      <div className="relative py-2">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-slate-200 dark:border-slate-700" />
+        </div>
+
+        <div className="relative flex justify-center">
+          <span className="bg-white px-3 text-xs uppercase tracking-wider text-slate-400 dark:bg-slate-900">
+            Secure Registration
+          </span>
+        </div>
+      </div>
+
+      <p className="text-center text-sm text-slate-500 dark:text-slate-400">
         Already have an account?{' '}
-        <Link to="/login" className="font-semibold text-red-600 hover:underline">
+        <Link
+          to={ROUTES.LOGIN}
+          className="font-semibold text-red-600 transition hover:text-red-700"
+        >
           Sign In
         </Link>
       </p>

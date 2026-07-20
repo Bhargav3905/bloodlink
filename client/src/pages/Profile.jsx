@@ -13,14 +13,13 @@ import getApiError from '../utils/apiError';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-
   const [loading, setLoading] = useState(true);
-
   const [editing, setEditing] = useState(false);
 
   const fetchProfile = async () => {
     try {
       const response = await userService.getProfile();
+
       setUser(response.data);
     } catch (error) {
       toast.error(getApiError(error));
@@ -61,14 +60,26 @@ const Profile = () => {
 
   return (
     <DashboardLayout>
-      <ProfileCard
-        user={user}
-        loading={loading}
-        editing={editing}
-        onEdit={() => setEditing(true)}
-        onCancel={() => setEditing(false)}
-        onSubmit={handleUpdate}
-      />
+      <div className="space-y-8">
+        {/* Page Header */}
+
+        <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">My Profile</h1>
+
+          <p className="mt-2 text-slate-500 dark:text-slate-400">
+            View and update your personal information to keep your BloodLink account up to date.
+          </p>
+        </div>
+
+        <ProfileCard
+          user={user}
+          loading={loading}
+          editing={editing}
+          onEdit={() => setEditing(true)}
+          onCancel={() => setEditing(false)}
+          onSubmit={handleUpdate}
+        />
+      </div>
     </DashboardLayout>
   );
 };

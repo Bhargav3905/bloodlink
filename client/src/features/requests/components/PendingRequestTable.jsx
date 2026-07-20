@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { CheckCircle2, XCircle, Droplets, UserRound } from 'lucide-react';
 
 import Badge from '../../../components/ui/badge/Badge';
 import Button from '../../../components/ui/button/Button';
@@ -43,70 +44,124 @@ const PendingRequestTable = ({ requests, onRefresh }) => {
 
   return (
     <>
-      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <table className="w-full">
-          <thead className="bg-slate-100 dark:bg-slate-800">
-            <tr>
-              <th className="px-4 py-3 text-left">#</th>
-              <th className="px-4 py-3 text-left">Requester</th>
-              <th className="px-4 py-3 text-left">Role</th>
-              <th className="px-4 py-3 text-left">Blood</th>
-              <th className="px-4 py-3 text-left">Units</th>
-              <th className="px-4 py-3 text-left">Date</th>
-              <th className="px-4 py-3 text-center">Action</th>
-            </tr>
-          </thead>
+      <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="border-b border-slate-200 px-6 py-5 dark:border-slate-800">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">Pending Requests</h2>
 
-          <tbody>
-            {requests.map((request, index) => (
-              <tr key={request._id} className="border-t border-slate-200 dark:border-slate-700">
-                <td className="px-4 py-3">{index + 1}</td>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            Review every request before inventory allocation and payment.
+          </p>
+        </div>
 
-                <td className="px-4 py-3">
-                  <p className="font-semibold">{request.requester.fullName}</p>
+        <div className="overflow-x-auto">
+          <table className="min-w-full">
+            <thead className="bg-slate-50 dark:bg-slate-800/60">
+              <tr>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">
+                  #
+                </th>
 
-                  <p className="text-sm text-slate-500">{request.requester.email}</p>
-                </td>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">
+                  Requester
+                </th>
 
-                <td className="px-4 py-3 capitalize">
-                  <Badge>{request.requesterType}</Badge>
-                </td>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">
+                  Role
+                </th>
 
-                <td className="px-4 py-3 font-semibold text-red-600">{request.bloodGroup}</td>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">
+                  Blood
+                </th>
 
-                <td className="px-4 py-3">{request.quantity}</td>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">
+                  Units
+                </th>
 
-                <td className="px-4 py-3">{formatDate(request.createdAt)}</td>
+                <th className="px-6 py-4 text-left text-sm font-semibold text-slate-600 dark:text-slate-300">
+                  Requested
+                </th>
 
-                <td className="px-4 py-3">
-                  <div className="flex justify-center gap-2">
-                    <Button
-                      size="sm"
-                      variant="success"
-                      onClick={() => {
-                        setSelectedRequest(request);
-                        setAction('approve');
-                      }}
-                    >
-                      Approve
-                    </Button>
-
-                    <Button
-                      size="sm"
-                      variant="danger"
-                      onClick={() => {
-                        setSelectedRequest(request);
-                        setAction('reject');
-                      }}
-                    >
-                      Reject
-                    </Button>
-                  </div>
-                </td>
+                <th className="px-6 py-4 text-center text-sm font-semibold text-slate-600 dark:text-slate-300">
+                  Action
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {requests.map((request, index) => (
+                <tr
+                  key={request._id}
+                  className="transition-colors hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/40"
+                >
+                  <td className="px-6 py-5 font-medium text-slate-500">{index + 1}</td>
+
+                  <td className="px-6 py-5">
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-xl bg-slate-100 p-2 dark:bg-slate-800">
+                        <UserRound size={18} className="text-slate-600 dark:text-slate-300" />
+                      </div>
+
+                      <div>
+                        <p className="font-semibold text-slate-900 dark:text-white">
+                          {request.requester.fullName}
+                        </p>
+
+                        <p className="text-sm text-slate-500">{request.requester.email}</p>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td className="px-6 py-5">
+                    <Badge>{request.requesterType}</Badge>
+                  </td>
+
+                  <td className="px-6 py-5">
+                    <div className="flex items-center gap-2 font-bold text-red-600">
+                      <Droplets size={16} />
+                      {request.bloodGroup}
+                    </div>
+                  </td>
+
+                  <td className="px-6 py-5 font-semibold text-slate-900 dark:text-white">
+                    {request.quantity}
+                  </td>
+
+                  <td className="px-6 py-5 text-slate-500">{formatDate(request.createdAt)}</td>
+
+                  <td className="px-6 py-5">
+                    <div className="flex justify-center gap-3">
+                      <Button
+                        size="sm"
+                        variant="success"
+                        className="gap-2"
+                        onClick={() => {
+                          setSelectedRequest(request);
+                          setAction('approve');
+                        }}
+                      >
+                        <CheckCircle2 size={15} />
+                        Approve
+                      </Button>
+
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        className="gap-2"
+                        onClick={() => {
+                          setSelectedRequest(request);
+                          setAction('reject');
+                        }}
+                      >
+                        <XCircle size={15} />
+                        Reject
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <ConfirmationDialog

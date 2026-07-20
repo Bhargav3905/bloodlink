@@ -5,15 +5,21 @@ const ResetPassword = () => {
   return (
     <AuthLayout>
       <div className="w-full max-w-md">
-        <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-          Reset Password
-        </h2>
+        <span className="inline-flex rounded-full bg-red-100 px-4 py-2 text-sm font-semibold text-red-600 dark:bg-red-900/30">
+          Password Reset
+        </span>
 
-        <p className="mt-2 text-slate-500 dark:text-slate-400">
-          Enter your new password below.
+        <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          Create a new password
+        </h1>
+
+        <p className="mt-3 text-base leading-7 text-slate-500 dark:text-slate-400">
+          Choose a strong password to secure your BloodLink account.
         </p>
 
-        <ResetPasswordForm />
+        <div className="mt-10">
+          <ResetPasswordForm />
+        </div>
       </div>
     </AuthLayout>
   );

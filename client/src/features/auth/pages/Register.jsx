@@ -5,15 +5,22 @@ const Register = () => {
   return (
     <AuthLayout>
       <div className="w-full max-w-md">
-        <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-          Create Account
-        </h2>
+        <span className="inline-flex rounded-full bg-red-100 px-4 py-2 text-sm font-semibold text-red-600 dark:bg-red-900/30">
+          Join BloodLink
+        </span>
 
-        <p className="mt-2 text-slate-500 dark:text-slate-400">
-          Register to join BloodLink.
+        <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          Create your account
+        </h1>
+
+        <p className="mt-3 text-base leading-7 text-slate-500 dark:text-slate-400">
+          Register to securely donate blood, request blood, manage inventory and access your
+          personalized dashboard.
         </p>
 
-        <RegisterForm />
+        <div className="mt-10">
+          <RegisterForm />
+        </div>
       </div>
     </AuthLayout>
   );
