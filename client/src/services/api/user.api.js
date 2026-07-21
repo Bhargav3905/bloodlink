@@ -1,12 +1,10 @@
 import axiosInstance from './axiosInstance';
 
 const userApi = {
-  // Profile
   getProfile: () => axiosInstance.get('/users/me'),
 
   updateProfile: (data) => axiosInstance.patch('/users/profile', data),
 
-  // Admin User Management
   getUsers: (params) => axiosInstance.get('/users', { params }),
 
   getPendingUsers: () => axiosInstance.get('/users/pending'),

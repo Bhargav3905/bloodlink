@@ -76,7 +76,6 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre("save", async function () {
-  // Hash only when password is modified
   if (!this.isModified("password")) {
     return;
   }

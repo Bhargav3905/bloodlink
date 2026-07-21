@@ -14,18 +14,6 @@ export const REQUEST_STATUS = Object.freeze({
   EXPIRED: "expired",
 });
 
-export const PAYMENT_STATUS = Object.freeze({
-  PENDING: "pending",
-  SUCCESS: "success",
-  FAILED: "failed",
-});
-
-export const DONATION_STATUS = Object.freeze({
-  PENDING: "pending",
-  VERIFIED: "verified",
-  REJECTED: "rejected",
-});
-
 export const BLOOD_GROUPS = Object.freeze([
   "A+",
   "A-",

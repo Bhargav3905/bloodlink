@@ -1,7 +1,7 @@
 const SkeletonDashboard = () => {
   return (
     <div className="animate-pulse space-y-8">
-      {/* Hero */}
+      
       <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
         <div className="mb-4 h-5 w-36 rounded-full bg-slate-200 dark:bg-slate-700" />
 
@@ -10,7 +10,6 @@ const SkeletonDashboard = () => {
         <div className="mt-5 h-5 w-96 max-w-full rounded-full bg-slate-200 dark:bg-slate-700" />
       </div>
 
-      {/* Stats */}
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {[...Array(7)].map((_, index) => (
           <div
@@ -32,7 +31,6 @@ const SkeletonDashboard = () => {
         ))}
       </div>
 
-      {/* Charts */}
       <div className="grid gap-6 xl:grid-cols-2">
         {[1, 2].map((item) => (
           <div

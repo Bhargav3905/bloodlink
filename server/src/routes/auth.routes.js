@@ -16,7 +16,6 @@ router.post("/register", registerUser);
 
 router.post("/login", loginUser);
 
-// Protected
 router.post("/logout", verifyJWT, logoutUser);
 
 router.post("/refresh-token", refreshAccessToken);

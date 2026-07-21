@@ -37,9 +37,11 @@ const InventorySummary = ({ totalUnits, totalBloodGroups, lowStockCount }) => {
           <Card key={item.title}>
             <CardContent className="flex items-center justify-between py-6">
               <div>
-                <p className="text-sm text-slate-500">{item.title}</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">{item.title}</p>
 
-                <h2 className="mt-2 text-3xl font-bold">{item.value}</h2>
+                <h2 className="mt-2 text-3xl font-bold text-slate-900 dark:text-white">
+                  {item.value}
+                </h2>
               </div>
 
               <div className={`rounded-full p-4 ${item.bg}`}>

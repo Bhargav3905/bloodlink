@@ -61,7 +61,6 @@ const Profile = () => {
   return (
     <DashboardLayout>
       <div className="space-y-8">
-        {/* Page Header */}
 
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <h1 className="text-3xl font-bold text-slate-900 dark:text-white">My Profile</h1>

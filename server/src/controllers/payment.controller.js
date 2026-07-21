@@ -60,13 +60,11 @@ const verifyPayment = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Payment details are required");
   }
 
-  // Generate signature
   const expectedSignature = crypto
     .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
     .update(`${razorpay_order_id}|${razorpay_payment_id}`)
     .digest("hex");
 
-  // Verify signature
   if (expectedSignature !== razorpay_signature) {
     throw new ApiError(400, "Invalid payment signature");
   }

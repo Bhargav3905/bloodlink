@@ -53,24 +53,18 @@ const InventoryCard = ({ item, isLowStock }) => {
         hover:shadow-2xl
       `}
     >
-      {/* Decorative Glow */}
 
       <div
         className={`absolute -right-10 -top-10 h-28 w-28 rounded-full blur-3xl transition-opacity duration-300 group-hover:opacity-100 ${status.glow}`}
       />
 
       <CardContent className="relative flex flex-col items-center px-6 py-8">
-        {/* Icon */}
 
         <div className="mb-5 rounded-2xl bg-red-100 p-5 transition-transform duration-300 group-hover:scale-105 dark:bg-red-950/30">
           <Droplets size={36} className="text-red-600" />
         </div>
 
-        {/* Blood Group */}
-
         <h2 className="text-4xl font-extrabold tracking-tight text-red-600">{item.bloodGroup}</h2>
-
-        {/* Quantity */}
 
         <p className="mt-6 text-5xl font-bold tracking-tight text-slate-900 dark:text-white">
           {item.quantity}
@@ -80,11 +74,7 @@ const InventoryCard = ({ item, isLowStock }) => {
           Available Units
         </p>
 
-        {/* Divider */}
-
         <div className="my-6 h-px w-full bg-slate-200 dark:bg-slate-800" />
-
-        {/* Status */}
 
         <Badge variant={status.variant} className="flex items-center gap-2 px-4 py-1.5">
           <StatusIcon size={15} />

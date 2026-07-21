@@ -1,7 +1,6 @@
 import userApi from '../../../services/api/user.api';
 
 const userService = {
-  // Profile
   getProfile: async () => {
     const response = await userApi.getProfile();
     return response.data;
@@ -12,7 +11,6 @@ const userService = {
     return response.data;
   },
 
-  // Users
   getUsers: async (params) => {
     const response = await userApi.getUsers(params);
     return response.data;

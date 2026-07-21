@@ -119,9 +119,13 @@ const PublicNavbar = () => {
 
         <button
           onClick={() => setIsOpen((prev) => !prev)}
-          className="rounded-lg p-2 transition hover:bg-slate-100 hover:shadow-sm dark:hover:bg-slate-800 dark:hover:text-white md:hidden"
+          className=" rounded-xl p-2 text-slate-700 transition-all duration-200 md:hidden
+                    hover:bg-slate-100 hover:text-red-600 hover:shadow-sm
+                    dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-red-400
+                    "
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
         >
-          {isOpen ? <X /> : <Menu />}
+          {isOpen ? <X size={24} strokeWidth={2.2} /> : <Menu size={24} strokeWidth={2.2} />}
         </button>
       </div>
 
@@ -132,7 +136,11 @@ const PublicNavbar = () => {
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
-                className="rounded-lg px-3 py-2 text-left font-medium text-slate-700 transition-all duration-300 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                className={`rounded-lg px-3 py-2 text-left font-medium transition-all duration-300 ${
+                  activeSection === item.href.replace('#', '')
+                    ? 'bg-red-100 text-red-600 dark:bg-red-900/40 dark:text-red-300'
+                    : 'text-slate-700 hover:bg-slate-100 hover:text-red-600 dark:text-slate-300 dark:hover:bg-slate-800'
+                }`}
               >
                 {item.label}
               </button>

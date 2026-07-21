@@ -55,7 +55,6 @@ const RequestForm = ({ onSuccess }) => {
 
   return (
     <div className="rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-      {/* Header */}
 
       <div className="border-b border-slate-200 p-8 dark:border-slate-800">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
@@ -87,8 +86,6 @@ const RequestForm = ({ onSuccess }) => {
           </div>
         </div>
       </div>
-
-      {/* Form */}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 p-8">
         {user?.role === ROLES.PATIENT ? (

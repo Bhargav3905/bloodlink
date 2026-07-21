@@ -75,7 +75,7 @@ const DonationForm = () => {
               <input
                 value={user?.bloodGroup}
                 disabled
-                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-4 font-medium dark:border-slate-700 dark:bg-slate-900"
+                className="h-11 w-full rounded-xl border border-slate-300 bg-slate-100 px-4 font-medium text-slate-900 disabled:cursor-not-allowed dark:border-slate-700 dark:bg-slate-800 dark:text-white"
               />
             </div>
 
@@ -88,7 +88,7 @@ const DonationForm = () => {
               <input
                 value={user?.role?.charAt(0).toUpperCase() + user?.role?.slice(1)}
                 disabled
-                className="h-11 w-full rounded-xl border border-slate-300 bg-white px-4 font-medium dark:border-slate-700 dark:bg-slate-900"
+                className="h-11 w-full rounded-xl border border-slate-300 bg-slate-100 px-4 font-medium text-slate-900 disabled:cursor-not-allowed dark:border-slate-700 dark:bg-slate-800 dark:text-white"
               />
             </div>
           </div>

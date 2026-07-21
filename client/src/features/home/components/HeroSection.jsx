@@ -11,7 +11,6 @@ const HeroSection = () => {
       id="home"
       className="relative overflow-hidden bg-gradient-to-br from-red-50 via-white to-red-100 dark:from-slate-950 dark:via-slate-950 dark:to-red-950/20"
     >
-      {/* Background Glow */}
       <div className="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-red-300/20 blur-3xl" />
 
       <div className="absolute -right-40 top-40 h-80 w-80 lg:h-[340px] lg:w-[340px] rounded-full bg-red-400/10 blur-3xl" />
@@ -19,7 +18,6 @@ const HeroSection = () => {
       <div className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-red-500/10 blur-3xl" />
 
       <div className="mx-auto flex min-h-[90vh] max-w-7xl items-center px-6 py-20 lg:px-8 lg:gap-24">
-        {/* Left */}
 
         <div className="flex-1">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-red-100 px-4 py-2 text-sm font-medium text-red-600 dark:bg-red-900/30">
@@ -71,8 +69,6 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-
-        {/* Right */}
 
         <div className="mt-12 flex flex-1 justify-center lg:mt-0">
           <div className="relative">

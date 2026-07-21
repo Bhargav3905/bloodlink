@@ -30,7 +30,6 @@ const ProfileCard = ({ user, loading, editing, onEdit, onCancel, onSubmit }) => 
 
   return (
     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-      {/* Header */}
 
       <div className="border-b border-slate-200 bg-gradient-to-r from-red-600 to-rose-600 px-8 py-8 text-white dark:border-slate-800">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -54,8 +53,6 @@ const ProfileCard = ({ user, loading, editing, onEdit, onCancel, onSubmit }) => 
           )}
         </div>
       </div>
-
-      {/* Form */}
 
       <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 p-8 md:grid-cols-2">
         <FormField

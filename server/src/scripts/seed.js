@@ -14,7 +14,6 @@ const runSeeder = async () => {
     await seedAdmin();
     await seedInventory();
 
-    console.log("🌱 Seeding completed.");
     process.exit(0);
   } catch (error) {
     console.error("❌ Seeding failed:", error);

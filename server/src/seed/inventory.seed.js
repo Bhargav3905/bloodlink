@@ -12,8 +12,6 @@ const seedInventory = async () => {
       });
     }
   }
-
-  console.log("🩸 Inventory seeded successfully.");
 };
 
 export default seedInventory;

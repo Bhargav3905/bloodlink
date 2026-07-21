@@ -4,7 +4,6 @@ import {
   Heart,
   ClipboardList,
   Package,
-  BarChart3,
   Users,
 } from 'lucide-react';
 
@@ -37,11 +36,6 @@ export const SIDEBAR_ITEMS = {
       label: 'Requests',
       icon: ClipboardList,
       path: ROUTES.ADMIN_REQUESTS,
-    },
-    {
-      label: 'Analytics',
-      icon: BarChart3,
-      path: ROUTES.ADMIN_ANALYTICS,
     },
     {
       label: 'Profile',

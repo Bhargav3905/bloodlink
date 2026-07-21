@@ -11,14 +11,12 @@ import { userQuerySchema } from "../validations/query.validation.js";
 import { USER_ROLES } from "../constants/index.js";
 import { approvalEmail, rejectionEmail } from "../templates/emailTemplate.js";
 
-// Get logged-in user
 const getCurrentUser = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new ApiResponse(200, req.user, "Current user fetched successfully"));
 });
 
-// Update profile
 const updateProfile = asyncHandler(async (req, res) => {
   const validationResult = updateProfileSchema.safeParse(req.body);
 
@@ -28,12 +26,10 @@ const updateProfile = asyncHandler(async (req, res) => {
 
   const updates = validationResult.data;
 
-  // Prevent empty update request
   if (Object.keys(updates).length === 0) {
     throw new ApiError(400, "No fields provided for update");
   }
 
-  // Prevent duplicate phone numbers
   if (updates.phone) {
     const existingUser = await User.findOne({
       phone: updates.phone,
@@ -61,7 +57,6 @@ const updateProfile = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updatedUser, "Profile updated successfully"));
 });
 
-// Search, Filter, Sort & Get All Users
 const getAllUsers = asyncHandler(async (req, res) => {
   const validationResult = userQuerySchema.safeParse(req.query);
 
@@ -212,7 +207,6 @@ const rejectUser = asyncHandler(async (req, res) => {
     html: rejectionEmail(user.fullName),
   });
 
-  // Remove rejected registration
   await User.findByIdAndDelete(user._id);
 
   return res

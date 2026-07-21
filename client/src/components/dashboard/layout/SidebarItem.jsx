@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
+
 import useSidebar from '../../../hooks/useSidebar';
 
 const SidebarItem = ({ item }) => {
-  const { collapsed } = useSidebar();
+  const { collapsed, closeMobileSidebar } = useSidebar();
 
   const Icon = item.icon;
 
@@ -11,10 +12,11 @@ const SidebarItem = ({ item }) => {
     <>
       <NavLink
         to={item.path}
+        onClick={closeMobileSidebar}
         data-tooltip-id={collapsed ? item.label : undefined}
         data-tooltip-content={collapsed ? item.label : undefined}
         className={({ isActive }) =>
-          `group relative flex items-center rounded-xl px-4 py-3 transition-all duration-300 ${
+          `group relative flex items-center rounded-xl px-4 py-3 font-medium transition-all duration-300 ${
             collapsed ? 'justify-center' : 'gap-3'
           } ${
             isActive
@@ -25,9 +27,7 @@ const SidebarItem = ({ item }) => {
       >
         <Icon size={20} className="shrink-0" />
 
-        {!collapsed && (
-          <span className="font-medium transition-all duration-300">{item.label}</span>
-        )}
+        {!collapsed && <span className="truncate">{item.label}</span>}
       </NavLink>
 
       {collapsed && (

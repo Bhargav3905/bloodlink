@@ -35,7 +35,6 @@ const PendingRequestsPage = () => {
   return (
     <DashboardLayout>
       <div className="space-y-8">
-        {/* Hero */}
 
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">

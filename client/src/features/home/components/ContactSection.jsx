@@ -31,7 +31,6 @@ const ContactSection = () => {
       className="bg-gradient-to-b from-slate-50 via-white to-slate-50 py-24 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900"
     >
       <div className="mx-auto max-w-7xl px-6">
-        {/* Heading */}
 
         <div className="mx-auto mb-20 max-w-3xl text-center">
           <span className="inline-flex items-center rounded-full bg-red-100 px-4 py-2 text-sm font-semibold text-red-600 shadow-sm dark:bg-red-900/30 dark:text-red-300">
@@ -46,8 +45,6 @@ const ContactSection = () => {
             Have questions, suggestions or need assistance? Our team is always ready to help you.
           </p>
         </div>
-
-        {/* Cards */}
 
         <div className="grid gap-7 md:grid-cols-2 xl:grid-cols-4">
           {contactItems.map((item) => {

@@ -33,7 +33,6 @@ const generateAccessAndRefreshTokens = async (userId) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
-  // Validate request body
   const validationResult = registerSchema.safeParse(req.body);
 
   if (!validationResult.success) {
@@ -44,7 +43,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const { email, phone } = validatedData;
 
-  // Check existing email or phone
   const existingUser = await User.findOne({
     $or: [{ email }, { phone }],
   });
@@ -75,7 +73,6 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-  // Validate request body
   const validationResult = loginSchema.safeParse(req.body);
 
   if (!validationResult.success) {
@@ -84,21 +81,18 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const { email, password } = validationResult.data;
 
-  // Find user by email
   const user = await User.findOne({ email });
 
   if (!user) {
     throw new ApiError(404, "No account found. Please register to continue.");
   }
 
-  // Verify password
   const isPasswordValid = await user.isPasswordCorrect(password);
 
   if (!isPasswordValid) {
     throw new ApiError(401, "Invalid email or password");
   }
 
-  // Approval required for donor & hospital
   if (
     (user.role === USER_ROLES.DONOR || user.role === USER_ROLES.HOSPITAL) &&
     !user.isApproved
@@ -214,16 +208,13 @@ const forgotPassword = asyncHandler(async (req, res) => {
     throw new ApiError(404, "User not found");
   }
 
-  // Generate secure token
   const resetToken = crypto.randomBytes(32).toString("hex");
 
-  // Store hashed token
   user.resetPasswordToken = crypto
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
 
-  // Token expires in 15 minutes
   user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
 
   await user.save({

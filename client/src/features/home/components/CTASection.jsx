@@ -8,7 +8,6 @@ import { ROUTES } from '../../../constants/routes';
 const CTASection = () => {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-red-600 via-red-600 to-red-700 py-24">
-      {/* Background Effects */}
 
       <div className="absolute -left-24 top-0 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
 

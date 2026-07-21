@@ -28,16 +28,6 @@ export const paymentSuccessEmail = (name, bloodGroup, quantity) => `
 <p>Thank you for using BloodLink.</p>
 `;
 
-export const emergencyEmail = (hospital, bloodGroup, quantity) => `
-<h2>🚨 Emergency Blood Request</h2>
-<p>${hospital} has requested emergency blood.</p>
-<ul>
-    <li>Blood Group : ${bloodGroup}</li>
-    <li>Units : ${quantity}</li>
-</ul>
-<p>Please respond immediately if available.</p>
-`;
-
 export const forgotPasswordEmail = (resetLink) => `
 <h2>Password Reset</h2>
 <p>Click below to reset your password.</p>

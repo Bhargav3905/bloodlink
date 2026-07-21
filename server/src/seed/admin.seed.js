@@ -7,7 +7,6 @@ const seedAdmin = async () => {
   });
 
   if (existingAdmin) {
-    console.log("✅ Admin already exists.");
     return;
   }
 
@@ -20,8 +19,6 @@ const seedAdmin = async () => {
     role: USER_ROLES.ADMIN,
     isApproved: true,
   });
-
-  console.log("✅ Admin seeded successfully.");
 };
 
 export default seedAdmin;

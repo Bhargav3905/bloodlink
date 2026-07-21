@@ -17,7 +17,6 @@ const statusVariant = {
 const MyRequestList = ({ requests, onPay, paymentLoading }) => {
   return (
     <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-      {/* Header */}
 
       <div className="border-b border-slate-200 px-6 py-5 dark:border-slate-800">
         <h2 className="text-xl font-bold text-slate-900 dark:text-white">My Blood Requests</h2>

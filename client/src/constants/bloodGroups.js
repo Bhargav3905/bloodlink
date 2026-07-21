@@ -1,4 +1,4 @@
-export const BLOOD_GROUPS = Object.freeze([
+const BLOOD_GROUPS = Object.freeze([
   'A+',
   'A-',
   'B+',

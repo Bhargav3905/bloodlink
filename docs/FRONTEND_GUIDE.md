@@ -505,7 +505,6 @@ Before merging a feature:
 * Dark mode
 * Responsive
 * Accessibility
-* No console errors
 * No unused code
 
 ---

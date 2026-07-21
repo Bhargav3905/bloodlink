@@ -19,12 +19,10 @@ const createRequest = asyncHandler(async (req, res) => {
 
   const user = req.user;
 
-  // Only patient & hospital
   if (user.role !== USER_ROLES.PATIENT && user.role !== USER_ROLES.HOSPITAL) {
     throw new ApiError(403, "Only patients and hospitals can request blood");
   }
 
-  // Patient can request only their own blood group
   if (user.role === USER_ROLES.PATIENT && user.bloodGroup !== bloodGroup) {
     throw new ApiError(
       400,
@@ -32,12 +30,10 @@ const createRequest = asyncHandler(async (req, res) => {
     );
   }
 
-  // Patient quantity restriction
   if (user.role === USER_ROLES.PATIENT && quantity > 2) {
     throw new ApiError(400, "Patients can request a maximum of 2 blood units.");
   }
 
-  // Hospital quantity restriction
   if (user.role === USER_ROLES.HOSPITAL && quantity > 5) {
     throw new ApiError(
       400,

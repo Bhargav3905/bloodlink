@@ -38,12 +38,12 @@ const DonationHistory = () => {
           <div>
             <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Donation History</h1>
 
-            <p className="mt-2 text-slate-500">Monitor every donation recorded in BloodLink.</p>
+            <p className="mt-2 text-slate-600 dark:text-slate-400">Monitor every donation recorded in BloodLink.</p>
           </div>
 
           {!loading && (
             <div className="rounded-xl border border-red-200 bg-red-50 px-5 py-3 dark:border-red-900 dark:bg-red-950/30">
-              <p className="text-sm text-slate-500">Total Donations</p>
+              <p className="text-sm text-slate-600 dark:text-slate-400">Total Donations</p>
 
               <p className="text-2xl font-bold text-red-600">{donations.length}</p>
             </div>

@@ -30,7 +30,7 @@ const AboutSection = () => {
       className="bg-gradient-to-b from-white via-slate-50 to-white py-24 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
     >
       <div className="mx-auto grid max-w-7xl items-center gap-20 px-6 lg:grid-cols-2">
-        {/* Left */}
+        
         <div>
           <span className="inline-flex items-center rounded-full bg-red-100 px-4 py-2 text-sm font-semibold text-red-600 shadow-sm dark:bg-red-900/30 dark:text-red-300">
             About BloodLink
@@ -52,7 +52,6 @@ const AboutSection = () => {
           </p>
         </div>
 
-        {/* Right */}
         <div className="grid gap-7 sm:grid-cols-2">
           {cards.map((card) => {
             const Icon = card.icon;

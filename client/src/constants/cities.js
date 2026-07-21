@@ -1,4 +1,4 @@
-export const GUJARAT_CITIES = Object.freeze([
+const GUJARAT_CITIES = Object.freeze([
   'Ahmedabad',
   'Nadiad',
   'Anand',
