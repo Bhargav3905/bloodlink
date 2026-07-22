@@ -1,14 +1,107 @@
 # BloodLink Design System
 
-Version: 1.0
+**Version:** 1.0.0
 
-Project: BloodLink
+**Project:** BloodLink
 
-Type: Blood Bank Management System
+**Application Type:** Full Stack MERN Blood Bank Management System
 
-Frontend Stack:
+**Design System Status:** Production Ready
 
-- React (Vite)
+**Last Updated:** Final Release (v1.0.0)
+
+---
+
+## Project Overview
+
+BloodLink is a production-quality Blood Bank Management System designed to digitally connect donors, patients, hospitals, and administrators through a centralized healthcare platform.
+
+The application manages the complete blood donation lifecycle including secure authentication, blood inventory, donation records, request approvals, dynamic payment processing, analytics, and email notifications while maintaining a clean, accessible, and healthcare-focused user experience.
+
+Rather than functioning as a simple CRUD application, BloodLink follows real-world workflows that emphasize transparency, scalability, security, and maintainability.
+
+---
+
+## Project Objectives
+
+The primary goals of BloodLink are to:
+
+- Digitize blood donation and request management.
+- Reduce manual intervention through workflow automation.
+- Provide secure role-based access for different user types.
+- Maintain centralized blood inventory.
+- Improve transparency across blood request processing.
+- Simplify administrator operations through analytics.
+- Deliver a responsive, modern, and accessible interface.
+- Demonstrate production-level full stack engineering practices.
+
+---
+
+## Target Users
+
+BloodLink is designed for four primary user groups.
+
+## Administrator
+
+Responsible for managing the overall platform.
+
+Capabilities include:
+
+- User Approval
+- Blood Request Approval
+- Inventory Monitoring
+- Dashboard Analytics
+- Revenue Monitoring
+- Blood Distribution Analysis
+
+---
+
+## Donor
+
+Individual users willing to donate blood.
+
+Capabilities include:
+
+- Blood Donation
+- Donation Cooldown Validation
+- Profile Management
+
+---
+
+## Patient
+
+Users requesting blood for medical needs.
+
+Capabilities include:
+
+- Blood Request Creation
+- Dynamic Processing Fee
+- Razorpay Payment
+- Request Tracking
+- Profile Management
+
+---
+
+## Hospital
+
+Healthcare organizations participating in blood management.
+
+Capabilities include:
+
+- Multi-unit Blood Donation
+- Multi-unit Blood Requests
+- Payment Processing
+- Request Tracking
+- Inventory Contribution
+
+---
+
+## Technology Stack
+
+## Frontend
+
+- React 19
+- Vite
 - Tailwind CSS
 - React Router DOM
 - Axios
@@ -18,202 +111,540 @@ Frontend Stack:
 - Recharts
 - Lucide React
 
-Design System Version:
-1.0
+---
 
-Status:
-Production Ready
+## Backend
 
-Last Updated:
-Sprint 0
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- Zod Validation
+- Razorpay
+- Nodemailer (Brevo SMTP)
 
-Project Tagline:
-Connecting Lives Through Smart Blood Management.
+---
 
-Project Goal:
+## Development Tools
 
-BloodLink is a centralized Blood Bank Management System designed to streamline the interaction between donors, hospitals, patients, and administrators.
+- Git
+- GitHub
+- VS Code
+- ESLint
+- Prettier
+- Postman
 
-The application simplifies blood donation, inventory management, blood requests, approvals, and distribution through a secure, role-based workflow.
+---
 
-The primary objective is to provide a modern, intuitive, and trustworthy platform that improves transparency, reduces response time, and enhances the overall blood management process.
+## System Architecture
+
+```text
+                    ┌─────────────────────────────┐
+                    │        React (Vite)         │
+                    │     Tailwind CSS Frontend   │
+                    └──────────────┬──────────────┘
+                                   │
+                           REST API (Axios)
+                                   │
+                    ┌──────────────▼──────────────┐
+                    │      Express.js Backend     │
+                    │ Authentication & Business   │
+                    │           Logic             │
+                    └──────────────┬──────────────┘
+                                   │
+            ┌──────────────────────┼──────────────────────┐
+            │                      │                      │
+            ▼                      ▼                      ▼
+      MongoDB Atlas          Razorpay Gateway       Brevo SMTP
+         Database              Payment System      Email Service
+```
+
+BloodLink follows a modular MVC architecture where the frontend communicates with the backend through REST APIs. Authentication, authorization, business validation, payment verification, inventory management, and analytics are handled by the backend before data is persisted into MongoDB.
+
+---
+
+## Project Structure
+
+```text
+BloodLink/
+│
+├── client/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── constants/
+│   │   ├── contexts/
+│   │   ├── features/
+│   │   ├── hooks/
+│   │   ├── layouts/
+│   │   ├── pages/
+│   │   ├── providers/
+│   │   ├── services/
+│   │   ├── styles/
+│   │   └── utils/
+│   │
+│   └── package.json
+│
+├── server/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── constants/
+│   │   ├── controllers/
+│   │   ├── database/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── scripts/
+│   │   ├── seed/
+│   │   ├── templates/
+│   │   ├── utils/
+│   │   └── validations/
+│   │
+│   └── package.json
+│
+├── docs/
+├── screenshots/
+├── LICENSE
+└── README.md
+```
+
+---
+
+## Core System Workflows
+
+## Authentication
+
+```text
+Register
+      │
+      ▼
+Login
+      │
+      ▼
+JWT Authentication
+      │
+      ▼
+Protected Dashboard
+```
+
+---
+
+## Blood Request
+
+```text
+Create Request
+        │
+        ▼
+Pending
+        │
+        ▼
+Admin Approval
+        │
+        ▼
+Payment Pending
+        │
+        ▼
+Razorpay Payment
+        │
+        ▼
+Payment Verification
+        │
+        ▼
+Inventory Deduction
+        │
+        ▼
+Completed
+```
+
+---
+
+## Blood Donation
+
+```text
+Record Donation
+        │
+        ▼
+Validation
+        │
+        ▼
+Inventory Update
+        │
+        ▼
+Analytics Update
+```
+
+---
 
 ## Design Philosophy
 
-BloodLink follows a clean, professional, and healthcare-oriented design language.
+BloodLink follows a modern healthcare-first design language focused on trust, clarity, accessibility, and efficiency.
 
-The interface should always communicate:
+Every interface is designed to reduce cognitive load while enabling users to complete critical healthcare tasks quickly and confidently.
 
-• Trust
-• Simplicity
-• Reliability
-• Professionalism
-• Accessibility
+The application prioritizes:
 
-Every screen should feel calm and organized while ensuring users can quickly perform critical tasks with minimal effort.
+- Simplicity over complexity
+- Clarity over decoration
+- Consistency over variation
+- Accessibility over aesthetics
+- Usability over visual effects
 
-The design prioritizes clarity over decoration.
+Every design decision should improve user confidence and minimize friction.
 
-Animations should support usability rather than distract from it.
+---
 
-Every visual element should serve a purpose.
+## Brand Identity
 
-## Brand Personality
+BloodLink represents a modern healthcare platform built around reliability and compassion.
 
-BloodLink represents:
+The product personality is:
 
-• Trustworthy
-• Modern
-• Helpful
-• Compassionate
-• Professional
-• Efficient
-• Human-Centered
+- Trustworthy
+- Professional
+- Human-Centered
+- Modern
+- Calm
+- Efficient
+- Accessible
+- Secure
 
-The UI should inspire confidence while remaining approachable for all users regardless of technical experience.
+Every screen should reinforce these values through consistent layouts, meaningful color usage, and predictable interactions.
 
-## UI Principles
+---
 
-### Consistency
+## Design Principles
 
-Every page should follow identical spacing, typography, button styles, and interaction patterns.
+## Consistency
 
-### Simplicity
+Every page should reuse the same design language.
 
-Avoid unnecessary complexity.
-Every action should be obvious.
+Maintain consistent:
 
-### Readability
+- Typography
+- Colors
+- Component spacing
+- Border radius
+- Shadows
+- Icons
+- Interaction patterns
 
-Content should remain easy to scan and understand.
+Reusable components should always be preferred over page-specific implementations.
 
-### Accessibility
+---
 
-Design for everyone by maintaining strong color contrast, keyboard navigation, and semantic structure.
+## Simplicity
 
-### Responsiveness
+Healthcare software should never overwhelm users.
 
-Every feature must work seamlessly across mobile, tablet, laptop, and desktop devices.
+Interfaces should contain only the information necessary for completing the current task.
 
-### Reusability
+Avoid unnecessary visual noise.
 
-Components should be designed once and reused throughout the application.
+---
 
-### Performance
+## Clarity
 
-Prefer lightweight UI solutions and avoid unnecessary rendering or visual clutter.
+Users should immediately understand:
 
-## Healthcare Design Direction
+- Where they are
+- What actions are available
+- What information is important
+- What happens after each action
 
-The interface should never feel alarming or overwhelming.
+Primary actions should always be visually prominent.
 
-Instead, it should communicate:
+---
 
-✓ Calmness
-✓ Confidence
-✓ Safety
-✓ Professionalism
-✓ Care
+## Accessibility
 
-Red should be reserved for healthcare identity and critical states, not used excessively across the interface.
+BloodLink follows accessibility-first principles.
 
-Neutral backgrounds and generous whitespace should improve readability and reduce cognitive load.
+Every screen should support:
 
-Green should indicate successful actions.
+- Proper color contrast
+- Keyboard navigation
+- Focus indicators
+- Semantic HTML
+- Screen readers where applicable
 
-Amber should indicate warnings.
+Accessibility is considered a core requirement rather than an optional enhancement.
 
-Blue should represent informational content.
+---
 
-Critical actions should always require user confirmation.
+## Responsiveness
 
-## Visual Style
+Every page should provide a consistent experience across:
 
-Theme:
-Modern Healthcare Dashboard
+- Mobile
+- Tablet
+- Laptop
+- Desktop
 
-Design Style:
-Minimal
+Layouts should adapt naturally without sacrificing usability.
 
-Components:
-Soft Rounded
+---
 
-Elevation:
-Medium
+## Performance
 
-Animations:
-Subtle
+Performance directly impacts user experience.
 
-Layout:
-Card-Based
+Design decisions should prioritize:
 
-Navigation:
-Sidebar + Top Navbar
+- Fast rendering
+- Minimal visual clutter
+- Efficient layouts
+- Lightweight interactions
 
-Dark Mode:
-Supported
+Animations should enhance usability rather than delay it.
 
-Icons:
-Lucide React
+---
 
-Illustrations:
-Healthcare-themed vectors for authentication, empty states, and onboarding only.
+## Healthcare Design Language
 
-Tables:
-Clean, searchable, responsive
+Healthcare applications require users to feel confident and safe.
 
-Charts:
-Simple, readable, and data-focused
+BloodLink communicates:
+
+- Trust
+- Care
+- Professionalism
+- Stability
+- Transparency
+
+The interface intentionally avoids aggressive visuals or distracting effects.
+
+Instead it uses whitespace, clear typography, subtle shadows, and restrained color accents to create a calm user experience.
+
+---
+
+## Visual Direction
+
+## Overall Style
+
+- Modern
+- Minimal
+- Card-Based
+- Professional
+- Healthcare Focused
+
+---
+
+## Layout
+
+Dashboard pages follow a consistent hierarchy.
+
+```text
+Header
+
+↓
+
+Page Title
+
+↓
+
+Statistics
+
+↓
+
+Charts / Highlights
+
+↓
+
+Tables
+
+↓
+
+Actions
+```
+
+---
+
+## Cards
+
+Cards are the primary building block of the application.
+
+Each card should include:
+
+- Consistent spacing
+- Soft shadows
+- Rounded corners
+- Responsive layout
+- Dark mode support
+
+Cards should never become visually crowded.
+
+---
+
+## Navigation
+
+Navigation should remain familiar across every role.
+
+Desktop:
+
+- Fixed Sidebar
+- Collapsible Sidebar
+- Sticky Navbar
+
+Mobile:
+
+- Drawer Navigation
+- Sticky Header
+- Touch-friendly controls
+
+Navigation should always indicate the user's current location within the application.
+
+---
+
+## Theme System
+
+BloodLink supports:
+
+- Light Theme
+- Dark Theme
+- System Preference
+
+Theme selection is persisted using Local Storage.
+
+Every component must support both themes without sacrificing readability or accessibility.
+
+---
+
+## Light Theme Goals
+
+- Bright
+- Clean
+- Professional
+- Spacious
+
+Primary surfaces:
+
+- White
+- Slate 50
+- Slate 100
+
+---
+
+## Dark Theme Goals
+
+Dark mode is designed for long usage sessions.
+
+Characteristics:
+
+- Comfortable contrast
+- Reduced eye strain
+- Consistent component hierarchy
+- Soft shadows
+- Clear typography
+
+Primary surfaces:
+
+- Slate 950
+- Slate 900
+- Slate 800
+
+---
+
+## Motion Guidelines
+
+Animations should communicate state changes instead of drawing attention.
+
+Recommended interactions:
+
+- Sidebar collapse
+- Modal transitions
+- Page transitions
+- Card hover
+- Loading skeletons
+- Toast notifications
+- Button feedback
+
+Avoid:
+
+- Excessive movement
+- Long animations
+- Decorative motion without purpose
+
+---
+
+## UX Principles
+
+Every important user action should provide immediate feedback.
+
+Examples include:
+
+- Successful login
+- Registration complete
+- Donation recorded
+- Request created
+- Payment successful
+- Profile updated
+- Request approved
+- Request rejected
+
+Feedback should be communicated through:
+
+- Toast notifications
+- Badge updates
+- Loading indicators
+- Confirmation dialogs
+
+Users should never be left wondering whether an action was completed successfully.
+
+---
 
 ## Color System
 
-### Color System Philosophy
+The BloodLink color system is designed around healthcare principles where colors communicate meaning instead of decoration.
 
-The color system should create a feeling of trust, safety, clarity, and professionalism.
-
-Colors should never compete for attention. Instead, they should guide users naturally through the application.
-
-The interface should primarily use neutral backgrounds with strategic use of accent colors.
+The interface primarily relies on neutral surfaces with carefully placed accent colors.
 
 ---
 
-## Primary Brand Color
+## Brand Colors
 
-Primary 50   : #FEF2F2
-Primary 100  : #FEE2E2
-Primary 200  : #FECACA
-Primary 300  : #FCA5A5
-Primary 400  : #F87171
-Primary 500  : #EF4444
-Primary 600  : #DC2626
-Primary 700  : #B91C1C
-Primary 800  : #991B1B
-Primary 900  : #7F1D1D
+## Primary
 
-Primary Color Usage
+Healthcare Red
 
-• Main CTA Buttons
-• Active Navigation
-• Important Highlights
-• Links
-• Icons requiring emphasis
+| Shade | Hex |
+| ------- | ------ |
+| 50 | #FEF2F2 |
+| 100 | #FEE2E2 |
+| 200 | #FECACA |
+| 300 | #FCA5A5 |
+| 400 | #F87171 |
+| 500 | #EF4444 |
+| 600 | #DC2626 |
+| 700 | #B91C1C |
+| 800 | #991B1B |
+| 900 | #7F1D1D |
 
-Never overuse primary red throughout the interface.
+### Usage
+
+- Primary Buttons
+- Active Navigation
+- Important Actions
+- Healthcare Branding
+- Icons requiring emphasis
+
+Avoid using red as a background for large sections.
 
 ---
 
-## Secondary Color
+## Secondary
 
 Slate
 
-Used for
+Used for:
 
-• Sidebar
-• Cards
-• Borders
-• Secondary Buttons
-• Icons
-• Neutral UI
+- Cards
+- Sidebars
+- Borders
+- Secondary Buttons
+- Neutral UI
+- Tables
 
 ---
 
@@ -221,12 +652,12 @@ Used for
 
 Emerald
 
-Use for
+Used for:
 
-• Successful donations
-• Approved requests
-• Completed payments
-• Success alerts
+- Successful Donations
+- Approved Requests
+- Completed Payments
+- Success Messages
 
 ---
 
@@ -234,11 +665,12 @@ Use for
 
 Amber
 
-Use for
+Used for:
 
-• Pending approvals
-• Low stock
-• Waiting states
+- Pending Approvals
+- Low Stock
+- Pending Payments
+- Waiting States
 
 ---
 
@@ -246,13 +678,13 @@ Use for
 
 Red
 
-Use only for
+Used for:
 
-• Delete
-• Reject
-• Critical warnings
-• Failed payments
-• Expired requests
+- Reject Actions
+- Delete Actions
+- Failed Payments
+- Validation Errors
+- Critical Alerts
 
 ---
 
@@ -260,77 +692,41 @@ Use only for
 
 Blue
 
-Use for
+Used for:
 
-• Information cards
-• Help messages
-• Tooltips
-• Analytics
-
----
-
-## Background
-
-Light Theme
-
-Page Background
-Gray 50
-
-Card Background
-White
-
-Hover
-Gray 100
-
-Border
-Gray 200
+- Information Cards
+- Tooltips
+- Help Sections
+- Analytics
+- User Guidance
 
 ---
 
-Dark Theme
+## Theme Colors
 
-Page Background
-Gray 950
+## Light Theme
 
-Card Background
-Gray 900
-
-Hover
-Gray 800
-
-Border
-Gray 700
+| Element | Color |
+| ---------- | --------- |
+| Page | Slate 100 |
+| Card | White |
+| Border | Slate 200 |
+| Hover | Slate 50 |
+| Primary Text | Slate 900 |
+| Secondary Text | Slate 500 |
 
 ---
 
-## Text Colors
+## Dark Theme
 
-Primary Text
-
-Gray 900
-
-Secondary Text
-
-Gray 600
-
-Muted
-
-Gray 500
-
-Disabled
-
-Gray 400
-
-Dark Mode
-
-Primary
-Gray 100
-
-Secondary
-Gray 400
-
-Muted
-Gray 500
+| Element | Color |
+| ---------- | --------- |
+| Page | Slate 950 |
+| Card | Slate 900 |
+| Border | Slate 800 |
+| Hover | Slate 800 |
+| Primary Text | White |
+| Secondary Text | Slate 400 |
 
 ---
 
@@ -338,381 +734,207 @@ Gray 500
 
 ## Font Family
 
-Primary Font
+Primary
 
+```text
 Inter
+```
 
 Fallback
 
+```text
 sans-serif
+```
 
-Reason
-
-Modern
-
-Professional
-
-Excellent readability
-
-Perfect for dashboards
+Inter provides excellent readability for dashboards and healthcare applications.
 
 ---
 
 ## Font Scale
 
-Display
-
-48px
-
-H1
-
-36px
-
-H2
-
-30px
-
-H3
-
-24px
-
-H4
-
-20px
-
-Body Large
-
-18px
-
-Body
-
-16px
-
-Small
-
-14px
-
-Caption
-
-12px
+| Element | Size |
+| ---------- | ------ |
+| Display | 48px |
+| H1 | 36px |
+| H2 | 30px |
+| H3 | 24px |
+| H4 | 20px |
+| Body Large | 18px |
+| Body | 16px |
+| Small | 14px |
+| Caption | 12px |
 
 ---
 
 ## Font Weight
 
-Light
+| Weight | Usage |
+| ---------- | -------- |
+| 400 | Body |
+| 500 | Labels |
+| 600 | Buttons & Titles |
+| 700 | Important Headings |
+| 800 | Hero Titles |
 
-300
-
-Regular
-
-400
-
-Medium
-
-500
-
-Semi Bold
-
-600
-
-Bold
-
-700
-
-Extra Bold
-
-800
-
----
-
-## Typography Rules
-
-Maximum two font weights inside one card.
-
-Avoid excessive bold text.
-
-Use whitespace instead of larger fonts whenever possible.
-
-Maintain consistent line height.
+Avoid excessive bold typography.
 
 ---
 
 ## Spacing System
 
-Spacing Scale
+BloodLink follows an 8-point spacing system.
 
+```text
 4
-
 8
-
 12
-
 16
-
 20
-
 24
-
 32
-
 40
-
 48
-
 64
-
 80
-
 96
+```
 
-Use only these spacing values.
-
-Avoid random spacing.
-
----
-
-Container Width
-
-Maximum
-
-1440px
-
-Dashboard
-
-1280px
-
-Forms
-
-480px–600px
-
-Authentication Pages
-
-420px–500px
-
----
-
-Section Gap
-
-Desktop
-
-48px
-
-Tablet
-
-32px
-
-Mobile
-
-24px
-
----
-
-Card Padding
-
-Desktop
-
-24px
-
-Mobile
-
-16px
+Random spacing values should never be introduced.
 
 ---
 
 ## Border Radius
 
-Buttons
+| Component | Radius |
+| ------------ | --------- |
+| Button | 12px |
+| Input | 12px |
+| Card | 16px |
+| Modal | 20px |
+| Badge | Full |
+| Avatar | Full |
 
-12px
-
-Inputs
-
-12px
-
-Cards
-
-16px
-
-Modal
-
-20px
-
-Avatar
-
-Rounded Full
-
-Badges
-
-9999px
+Rounded corners should remain consistent across the application.
 
 ---
 
-## Shadow System
+## Shadows
 
-Level 1
+## Level 1
 
-Subtle
+Used for:
 
-Cards
-
-Level 2
-
-Hover
-
-Interactive cards
-
-Level 3
-
-Modal
-
-Dropdown
-
-Drawer
-
-Never use heavy shadows.
-
-The UI should feel soft.
+- Cards
 
 ---
 
-## Borders
+## Level 2
 
-Border Width
+Used for:
 
-1px
-
-Dividers
-
-Gray 200
-
-Dark
-
-Gray 700
+- Hover Cards
+- Interactive Components
 
 ---
 
-## Icons
+## Level 3
+
+Used for:
+
+- Modals
+- Drawers
+- Dialogs
+
+Heavy shadows should be avoided to maintain a clean healthcare appearance.
+
+---
+
+## Iconography
 
 Library
 
+```text
 Lucide React
+```
 
-Secondary
+Recommended Sizes
 
-React Icons
+| Usage | Size |
+| --------- | ------ |
+| Small | 16 |
+| Default | 20 |
+| Medium | 24 |
+| Large | 32 |
+| Hero | 48 |
 
----
+Guidelines
 
-Icon Sizes
-
-Small
-
-16
-
-Default
-
-20
-
-Medium
-
-24
-
-Large
-
-32
-
-Extra Large
-
-48
-
----
-
-Rules
-
-Every button should have optional icon support.
-
-Never mix multiple icon styles.
-
-Icons should always align vertically.
+- Use one icon library throughout the project.
+- Align icons consistently.
+- Pair icons with meaningful labels where appropriate.
 
 ---
 
 ## Layout System
 
-Overall Layout
+## Desktop
 
+```text
 Sidebar
 
--
-
-Top Navbar
-
--
-
-Content Area
-
----
-
-Sidebar
-
-Fixed
-
-Collapsible
-
-Desktop
-
-Hidden on mobile
-
-Drawer on mobile
-
----
+↓
 
 Navbar
 
-Sticky
+↓
 
-Contains
-
-Search
-
-Theme Toggle
-
-Notifications
-
-Profile Menu
+Scrollable Content
+```
 
 ---
 
-Content
-
-Scrollable
-
-Centered
-
-Consistent spacing
-
----
-
-Cards
-
-Responsive Grid
+## Sidebar
 
 Desktop
 
-4 columns
-
-Laptop
-
-3 columns
-
-Tablet
-
-2 columns
+- Fixed
+- Collapsible
+- Icon Support
+- Active States
 
 Mobile
 
-1 column
+- Drawer Navigation
+- Overlay
+- Touch Friendly
+
+---
+
+## Navbar
+
+Contains
+
+- Branding
+- Theme Toggle
+- User Information
+- Logout
+
+The navbar should remain lightweight and uncluttered.
+
+---
+
+## Responsive Design
+
+BloodLink follows a mobile-first strategy.
+
+| Breakpoint | Width |
+| ------------ | -------- |
+| Mobile | 0–639px |
+| Small Tablet | ≥640px |
+| Tablet | ≥768px |
+| Laptop | ≥1024px |
+| Desktop | ≥1280px |
+| Large Desktop | ≥1536px |
 
 ---
 
@@ -730,146 +952,77 @@ Mobile
 
 4 Columns
 
-Gap
+Standard Gap
 
+```text
 24px
-
----
-
-## Responsive Breakpoints
-
-Mobile
-
-0–639px
-
-Small Tablet
-
-640px
-
-Tablet
-
-768px
-
-Laptop
-
-1024px
-
-Desktop
-
-1280px
-
-Large Desktop
-
-1536px
+```
 
 ---
 
 ## Design Tokens
 
-Never hardcode
+The following values should never be hardcoded inside components.
 
-Colors
+- Colors
+- Typography
+- Border Radius
+- Shadows
+- Animation Duration
+- Spacing
+- Breakpoints
 
-Spacing
-
-Radius
-
-Shadow
-
-Transition
-
-Duration
-
-Font Size
-
-Always use Tailwind configuration or design tokens.
+Instead, use centralized Tailwind utility classes and reusable component variants.
 
 ---
-
-## Theme Rules
-
-Support
-
-Light
-
-Dark
-
-System Preference
-
-Theme should persist using local storage.
-
-Icons should adapt automatically.
-
-Charts should support both themes.
-
----
-
-## White Space Rules
-
-Every screen should breathe.
-
-Never place cards too close.
-
-Avoid crowded dashboards.
-
-Whitespace improves readability more than colors.
-
----
-
-## Visual Hierarchy
-
-Heading
-
-↓
-
-Description
-
-↓
-
-Primary Action
-
-↓
-
-Secondary Information
-
-↓
-
-Metadata
-
-Users should immediately understand where to look first.
-
-Never create competing visual elements.
 
 ## Component Design Rules
 
 ## Component Philosophy
 
-Every UI element should be reusable.
+BloodLink follows a reusable component-first architecture.
 
-Avoid creating page-specific components unless absolutely necessary.
+Every component should:
 
-Each component should have:
+- Have a single responsibility.
+- Be reusable across multiple pages.
+- Support both light and dark themes.
+- Be responsive.
+- Maintain visual consistency.
+- Keep business logic separated from presentation.
+- Follow accessibility best practices.
 
-- Single responsibility
-- Consistent API
-- Accessibility support
-- Responsive behavior
-- Dark mode support
-- Loading state (where applicable)
-
-### General Rules
-
-- Prefer composition over duplication.
-- Keep components visually consistent.
-- Never hardcode colors or spacing.
-- Use Tailwind utility classes with reusable variants.
-- Keep business logic outside presentational components.
+Avoid creating page-specific components when a reusable solution already exists.
 
 ---
 
-## Button System
+## UI Component Library
 
-## Variants
+The application is built around a centralized component library.
+
+## Core Components
+
+### Layout Components
+
+- Sidebar
+- Navbar
+- Dashboard Layout
+- Public Layout
+- Auth Layout
+
+---
+
+### Navigation Components
+
+- Sidebar Item
+- Theme Toggle
+- Breadcrumb (Future)
+
+---
+
+### Buttons
+
+Supported variants:
 
 - Primary
 - Secondary
@@ -880,500 +1033,532 @@ Each component should have:
 - Danger
 - Link
 
-## Sizes
-
-- Small
-- Medium (Default)
-- Large
-
-## States
+Supported states:
 
 - Default
 - Hover
 - Active
-- Focus
 - Disabled
 - Loading
 
-## Guidelines
+Buttons should:
 
-- Primary CTA should appear only once per section.
-- Use loading indicators instead of allowing multiple clicks.
-- Every button should optionally support an icon.
-- Destructive actions should always require confirmation.
+- Support icons
+- Maintain consistent sizing
+- Display loading indicators
+- Prevent duplicate submissions
 
 ---
 
-## Form Design Guidelines
+### Forms
 
-Forms should feel simple and easy to complete.
+Reusable form components include:
 
-## Validation
-
-- Validate before submission whenever possible.
-- Show inline error messages.
-- Highlight invalid fields clearly.
-- Preserve user input after validation errors.
-
-## Input Components
-
-- Text Input
-- Email
-- Password
-- Search
-- Number
-- Phone
+- Input
+- Password Input
 - Select
-- Textarea
-- Checkbox
-- Radio
-- Date Picker (Future)
-- File Upload (Future)
+- Label
+- Form Field
+- Input Error
 
-## UX Rules
+Form guidelines:
 
 - Labels should always remain visible.
-- Required fields should be clearly indicated.
-- Use helper text only when necessary.
-- Password fields should include visibility toggle.
-- Disable submit button during requests.
+- Required fields should be clearly marked.
+- Validation should occur before submission whenever possible.
+- Preserve user input after validation failures.
+- Disable submit buttons while requests are in progress.
 
 ---
 
-## Card Guidelines
+### Card Components
 
-Cards are the primary building block of the application.
+Cards are the primary container component throughout the application.
 
-Use cards for:
+Reusable card components:
 
-- Statistics
-- User information
-- Blood inventory
-- Donation records
-- Request details
-- Analytics
-- Dashboard widgets
+- Card
+- Card Header
+- Card Content
+- Card Title
 
-Every card should include:
+Cards should:
 
-- Consistent padding
-- Proper spacing
-- Rounded corners
-- Soft shadow
-- Responsive layout
-
-Avoid placing excessive information inside one card.
+- Use consistent padding.
+- Maintain rounded corners.
+- Support dark mode.
+- Display subtle shadows.
+- Never become visually overcrowded.
 
 ---
 
-## Table Guidelines
+### Badges
+
+Badges communicate status visually.
+
+Supported variants:
+
+- Default
+- Success
+- Warning
+- Danger
+- Info
+
+Badges are used for:
+
+- Request Status
+- Payment Status
+- User Roles
+- Inventory States
+- Dashboard Indicators
+
+---
+
+### Tables
 
 Tables should support:
 
-- Search
-- Sorting
-- Filtering
-- Pagination
-- Responsive layout
+- Responsive layouts
+- Consistent spacing
+- Hover feedback
+- Status badges
+- Action buttons
 
-On smaller screens:
-
-- Convert dense tables into stacked cards when appropriate.
-- Avoid horizontal scrolling whenever possible.
-
-Rows should include hover feedback.
-
-Status columns should use colored badges instead of plain text.
-
-Actions should use compact icon buttons with tooltips.
+Large tables should remain readable on all supported screen sizes.
 
 ---
 
-## Dashboard Guidelines
+### Modal System
 
-Every dashboard should follow a consistent structure.
-
-## Recommended Order
-
-1. Welcome Section
-2. Statistics Cards
-3. Charts
-4. Recent Activity
-5. Tables
-6. Quick Actions
-
-## Statistics Cards
-
-Display only the most important metrics.
+Modal components are used for critical interactions.
 
 Examples:
 
+- Confirmation Dialog
+- Delete Confirmation
+- Logout Confirmation
+- Approval Confirmation
+
+Every destructive action should require explicit confirmation.
+
+---
+
+### Feedback Components
+
+BloodLink provides standardized feedback components.
+
+Available components:
+
+- Loader
+- Button Loader
+- Page Loader
+- Skeleton Loader
+- Empty State
+- Confirmation Dialog
+
+These components provide visual feedback during asynchronous operations and improve perceived performance.
+
+---
+
+## Dashboard Components
+
+Dashboard pages follow a consistent hierarchy.
+
+```text
+Page Header
+
+↓
+
+Statistics Cards
+
+↓
+
+Charts
+
+↓
+
+Recent Activity
+
+↓
+
+Tables
+
+↓
+
+Quick Actions
+```
+
+Statistics cards display only the most important metrics.
+
+Examples include:
+
+- Total Users
 - Total Donors
-- Blood Units Available
-- Pending Requests
-- Completed Donations
-
-Cards should prioritize readability over decoration.
-
----
-
-## Chart Guidelines
-
-Library
-
-- Recharts
-
-Supported Charts
-
-- Bar Chart
-- Line Chart
-- Pie Chart
-- Area Chart
-- Radial Chart (where appropriate)
-
-Guidelines
-
-- Do not use more than five colors in one chart.
-- Include legends where necessary.
-- Support dark mode.
-- Show empty state if data is unavailable.
-- Ensure charts remain readable on mobile devices.
+- Blood Units
+- Pending Approvals
+- Completed Requests
+- Revenue Generated
 
 ---
 
-## Navigation Guidelines
+## Analytics Components
 
-## Sidebar
+Analytics are presented through reusable visualization components.
 
-Contains primary navigation.
+Charts currently include:
 
-Should support:
+- Blood Group Distribution
+- Request Statistics
+- Inventory Summary
+- Recent Donations
+- Revenue Analytics
 
-- Collapse
-- Expand
-- Active state
-- Icons
-- Nested items (if needed)
+Charts should:
 
-Mobile
-
-- Off-canvas drawer
-
-Desktop
-
-- Fixed sidebar
+- Remain readable on all devices.
+- Support both themes.
+- Display meaningful legends.
+- Provide empty states when no data exists.
 
 ---
 
-## Top Navbar
+## Feedback & Loading Experience
 
-Contains:
+Every asynchronous operation should provide immediate visual feedback.
 
-- Search
-- Theme Toggle
-- Notifications (Future)
-- User Profile
-- Logout
+Supported loading states:
 
-Keep the navbar lightweight and uncluttered.
+- Full Page Loader
+- Skeleton Dashboard
+- Skeleton Profile
+- Skeleton Table
+- Button Loader
 
----
+Loading indicators should minimize perceived waiting time.
 
-## Feedback Components
-
-Use consistent feedback throughout the application.
-
-## Toast Notifications
-
-Library
-
-- React Hot Toast
-
-Success
-
-- Green
-
-Error
-
-- Red
-
-Warning
-
-- Amber
-
-Information
-
-- Blue
-
-Keep messages concise and meaningful.
-
----
-
-## Confirmation Dialogs
-
-Use a modern dialog component instead of browser alerts.
-
-Confirm before:
-
-- Delete
-- Reject
-- Logout
-- Inventory updates
-- Critical actions
-
----
-
-## Loading Experience
-
-Every asynchronous action should provide feedback.
-
-Loading Types
-
-- Full page loader
-- Skeleton loader
-- Button loader
-- Card loader
-- Table loader
-
-Avoid long blank screens.
-
-Skeletons are preferred over generic spinners for page content.
+Skeleton loaders are preferred over generic spinners for page-level content.
 
 ---
 
 ## Empty States
 
-Every empty page should include:
+Every module should gracefully handle the absence of data.
 
-- Relevant illustration or icon
-- Short explanation
-- Helpful action button
-
-Examples
+Examples:
 
 - No Donations
-- No Blood Requests
+- No Requests
 - No Inventory
 - No Search Results
+- No Pending Approvals
 
-Empty states should guide users toward the next action.
+Each empty state should include:
 
----
-
-## Error States
-
-Display friendly and actionable messages.
-
-Avoid exposing technical errors.
-
-Provide:
-
-- Error message
-- Retry action (where applicable)
-- Navigation back to safety
-
-Include dedicated pages for:
-
-- 401 Unauthorized
-- 403 Forbidden
-- 404 Not Found
-- 500 Server Error
+- Relevant icon
+- Clear title
+- Helpful description
+- Optional call-to-action
 
 ---
 
-## Motion & Animation
+## Error Handling
 
-Library
+Errors should always be user-friendly.
 
-- Framer Motion
+Avoid exposing backend or technical details.
 
-Animation Philosophy
+Every error message should:
 
-Animations should support user understanding, not distract.
-
-Use motion for:
-
-- Page transitions
-- Modals
-- Sidebar
-- Cards
-- Hover interactions
-- Expand/Collapse
-- Toasts
-
-Avoid excessive movement.
-
-Prefer subtle fades and smooth transforms.
+- Explain what happened.
+- Suggest the next step when possible.
+- Remain concise.
+- Maintain visual consistency.
 
 ---
 
-## Responsive Design Rules
+## Motion & Interaction
 
-Design mobile-first.
+Animations should improve usability.
 
-Support:
+Recommended animations include:
 
-- Mobile
-- Tablet
-- Laptop
-- Desktop
+- Sidebar Collapse
+- Mobile Drawer
+- Page Transitions
+- Card Hover
+- Button Hover
+- Modal Appearance
+- Toast Notifications
+- Skeleton Loading
 
-Guidelines
+Animations should remain subtle and responsive.
 
-- Stack layouts on smaller screens.
-- Collapse navigation into drawer.
-- Charts should resize gracefully.
-- Cards should wrap naturally.
-- Forms should remain easy to complete on touch devices.
+---
 
-Never sacrifice usability for visual symmetry.
+## Reusability Guidelines
+
+Before creating a new component, verify whether an existing reusable component can be extended.
+
+Avoid duplication by:
+
+- Sharing common UI elements.
+- Using centralized variants.
+- Keeping styling consistent.
+- Maintaining a predictable API.
+
+Reusable components should remain independent of business logic whenever possible.
 
 ---
 
 ## Accessibility Guidelines
 
-Follow WCAG-friendly practices.
+BloodLink is designed to provide an inclusive experience for all users.
 
-Include:
+The interface follows accessibility-first principles and aims to align with WCAG recommendations wherever practical.
+
+Every page should support:
 
 - Semantic HTML
-- Keyboard navigation
-- Focus indicators
-- ARIA labels where needed
-- Screen reader friendly components
-- Sufficient color contrast
+- Keyboard Navigation
+- Visible Focus States
+- Sufficient Color Contrast
+- Screen Reader Friendly Components
+- Accessible Form Labels
+- Meaningful Button Text
+- Responsive Touch Targets
 
-Accessibility is a requirement, not an enhancement.
+Accessibility is considered a core product requirement rather than an optional enhancement.
 
 ---
 
-## Dark Mode
+## Dark Mode Guidelines
 
-Support:
+BloodLink fully supports:
 
-- Light
-- Dark
+- Light Theme
+- Dark Theme
 - System Preference
 
-Requirements
+Theme selection is persisted using Local Storage to ensure a consistent experience across sessions.
 
-- Theme persists across sessions.
-- Charts adapt automatically.
-- Icons remain visible.
-- Contrast remains accessible.
-- Shadows are reduced in dark mode.
+Dark mode requirements:
 
----
+- Maintain accessible contrast ratios.
+- Preserve visual hierarchy.
+- Reduce eye strain during prolonged usage.
+- Ensure icons remain clearly visible.
+- Support charts and data visualizations.
+- Avoid overly saturated colors.
 
-## UI Consistency Rules
-
-Always maintain:
-
-- Consistent spacing
-- Consistent typography
-- Consistent icon sizing
-- Consistent button styles
-- Consistent form behavior
-- Consistent animations
-
-If a component already exists, reuse it instead of creating another variation.
+Every newly developed component must support both themes before being considered complete.
 
 ---
 
-## UX Principles
+## User Experience Guidelines
 
-Users should always know:
+The application should always provide immediate feedback after meaningful actions.
 
-- Where they are
-- What they can do
-- What happened
-- What happens next
+Examples include:
 
-Reduce clicks whenever practical.
+- Successful Login
+- Registration Complete
+- Donation Recorded
+- Request Submitted
+- Payment Successful
+- Profile Updated
+- Approval Completed
+- Request Rejected
 
-Provide immediate feedback after every meaningful action.
+Feedback mechanisms include:
 
-Design for clarity before aesthetics.
+- Toast Notifications
+- Loading Indicators
+- Skeleton Screens
+- Confirmation Dialogs
+- Empty States
+- Status Badges
 
----
-
-## Design Do's
-
-- Build reusable components.
-- Keep layouts clean.
-- Prioritize readability.
-- Maintain consistent spacing.
-- Use meaningful icons.
-- Support keyboard navigation.
-- Keep interactions predictable.
-- Optimize for performance.
-- Test on multiple screen sizes.
+Users should never be uncertain whether an action succeeded or failed.
 
 ---
 
-## Design Don'ts
+## Performance Guidelines
 
-- Do not hardcode colors.
-- Do not duplicate components.
-- Do not overload dashboards.
-- Do not overuse animations.
-- Do not rely solely on color for meaning.
-- Do not create inconsistent spacing.
-- Do not introduce multiple visual styles.
-- Do not expose raw backend errors.
-- Do not ignore accessibility.
+Performance is treated as a core design objective.
 
----
+Recommended practices:
 
-## Future Design Guidelines
+- Reusable Components
+- Feature-Based Architecture
+- Lazy API Requests
+- Parallel Data Fetching
+- Optimized Database Queries
+- Environment Variable Configuration
+- Minimal Component Re-renders
+- Centralized API Layer
+- Efficient State Management
 
-The design system should be capable of supporting future enhancements such as:
+Avoid:
 
-- Notifications
-- Multi-language support
-- Additional dashboard modules
-- New user roles
-- Reporting features
-- Mobile application consistency
-
-Any future feature must follow the existing design language instead of introducing a new one.
+- Unnecessary network requests
+- Duplicate rendering
+- Heavy animations
+- Large component trees
+- Repeated business logic
 
 ---
 
-## Final Design Checklist
+## Security Considerations
 
-Before merging any frontend feature, verify:
+Although primarily a design document, interface decisions should reinforce application security.
 
-- Responsive on all supported devices
-- Matches design system
-- Supports dark mode
-- Accessible by keyboard
-- Uses reusable components
-- Displays loading state
-- Handles empty state
-- Handles error state
-- Uses environment variables
-- No hardcoded values
-- No duplicated UI
-- Proper spacing and typography
-- Consistent icons and colors
-- Clean animations
-- Production-ready quality
+UI should support:
+
+- Protected Routes
+- Secure Authentication Flows
+- Role-Based Navigation
+- Confirmation for Critical Actions
+- Hidden Unauthorized Actions
+- Friendly Error Messages
+- Secure Password Inputs
+- Session Persistence
+
+Sensitive information should never be exposed within the interface.
 
 ---
 
-## BloodLink Design Principles
+## Production Readiness Checklist
 
-BloodLink is not designed to impress through excessive visual effects.
+Every new feature should satisfy the following requirements before release.
 
-It is designed to inspire confidence through clarity, consistency, and reliability.
+## Design
 
-Every screen should communicate trust.
+- Responsive Layout
+- Consistent Spacing
+- Consistent Typography
+- Proper Visual Hierarchy
+- Healthcare Design Language
+- Light & Dark Theme Support
 
-Every interaction should reduce friction.
+---
 
-Every component should be reusable.
+## Components
 
-Every feature should feel familiar.
+- Reusable
+- Responsive
+- Accessible
+- Single Responsibility
+- Consistent API
+- Loading State
+- Empty State
+- Error State
 
-Every design decision should support the healthcare mission of connecting donors, hospitals, patients, and administrators through a modern, secure, and intuitive blood management platform.
+---
+
+## User Experience
+
+- Smooth Navigation
+- Helpful Feedback
+- Confirmation for Critical Actions
+- Predictable Interactions
+- Responsive Animations
+
+---
+
+## Code Quality
+
+- No Hardcoded Values
+- Environment Variables Used
+- Reusable Components
+- Clean Folder Structure
+- Consistent Naming
+- ESLint Clean
+- Production Build Successful
+
+---
+
+## Performance Checklist
+
+- Fast Rendering
+- Optimized API Calls
+- Lightweight Components
+- Efficient State Updates
+
+---
+
+## Future Design Evolution
+
+The current design system is intended to support future enhancements without requiring architectural changes.
+
+Potential additions include:
+
+- Real-time Notifications
+- Appointment Scheduling
+- Emergency Blood Requests
+- Blood Compatibility Recommendations
+- Audit Logs
+- Advanced Reporting
+- Multi-language Support
+- Progressive Web App (PWA)
+- Native Mobile Application
+- AI-powered Blood Demand Prediction
+- Offline Support
+- QR Code Integration
+
+All future features should follow the existing design language and component architecture.
+
+---
+
+## Design Principles Summary
+
+BloodLink is designed around one simple philosophy:
+
+> **Healthcare software should inspire trust through clarity, consistency, and reliability.**
+
+Every interface should:
+
+- Reduce user effort.
+- Improve decision-making.
+- Communicate system status clearly.
+- Prioritize accessibility.
+- Encourage consistency.
+- Scale through reusable components.
+- Remain visually calm and professional.
+
+The success of the design system is measured not by visual complexity, but by how efficiently users can complete critical healthcare tasks.
+
+---
+
+## Document Information
+
+| Property | Value |
+| ---------- | ------- |
+| Project | BloodLink |
+| Document | Design System |
+| Version | 2.0.0 |
+| Status | Production Ready |
+| Frontend | React + Vite + Tailwind CSS |
+| Backend | Node.js + Express.js |
+| Database | MongoDB Atlas |
+| Architecture | Feature-Based MERN |
+| Design Language | Modern Healthcare Dashboard |
+| Theme Support | Light / Dark / System |
+| Responsive | Mobile First |
+| Last Updated | Final Release (v1.0.0) |
+
+---
+
+## Final Notes
+
+This design system serves as the single source of truth for BloodLink's user interface.
+
+Every future enhancement should preserve:
+
+- Visual consistency
+- Component reusability
+- Accessibility
+- Performance
+- Responsive behavior
+- Healthcare-focused user experience
+
+Following these principles ensures BloodLink remains maintainable, scalable, and production-ready as the application evolves.

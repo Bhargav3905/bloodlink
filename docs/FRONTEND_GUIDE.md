@@ -1,606 +1,798 @@
 # BloodLink Frontend Engineering Guide
 
-Version: 1.0
+**Version:** 1.0.0
 
-Project: BloodLink
+**Project:** BloodLink
 
-Frontend Stack
-
-* React 19 (Vite)
-* Tailwind CSS
-* React Router DOM
-* Axios
-* React Hook Form
-* React Hot Toast
-* Framer Motion
-* Recharts
-* Lucide React
-
-Status
-
-Production Ready
+**Status:** Production Ready
 
 ---
 
-## Purpose
+## Overview
 
-This document defines the frontend architecture, engineering standards, development workflow, and best practices for the BloodLink application.
+This document defines the frontend architecture, engineering standards, development workflow, and coding guidelines used throughout the BloodLink application.
 
-The objective is to build a scalable, maintainable, reusable, and production-ready frontend that consumes the existing backend APIs without introducing backend logic into the UI.
+The frontend is built as a production-quality React application following a feature-based architecture, reusable component system, centralized API communication, and modern engineering practices.
 
-This document serves as the engineering handbook for every frontend feature.
-
----
-
-## Core Principles
-
-The frontend must always be:
-
-* Modular
-* Reusable
-* Responsive
-* Accessible
-* Maintainable
-* Performant
-* Secure
-* Predictable
-
-Every architectural decision should support these principles.
+This guide serves as the primary engineering reference for current development and future maintenance.
 
 ---
 
-## Project Structure
+## Frontend Technology Stack
+
+## Core
+
+- React 19
+- Vite
+- JavaScript (ES2023)
+
+---
+
+## Styling
+
+- Tailwind CSS
+- CSS Variables
+- Responsive Design
+- Dark Mode
+
+---
+
+## Routing
+
+- React Router DOM
+
+---
+
+## Forms
+
+- React Hook Form
+
+---
+
+## API
+
+- Axios
+- Centralized API Layer
+
+---
+
+## UI Libraries
+
+- Lucide React
+- React Hot Toast
+- Framer Motion
+- Recharts
+
+---
+
+## Engineering Goals
+
+Every frontend feature should be:
+
+- Reusable
+- Modular
+- Maintainable
+- Accessible
+- Responsive
+- Performant
+- Predictable
+- Production Ready
+
+The frontend should remain independent from backend implementation details while consuming backend APIs consistently.
+
+---
+
+## Architecture
+
+BloodLink follows a Feature-Based Architecture.
 
 ```text
 src/
 
-app/
-│
-├── router/
-├── providers/
-├── layouts/
-│
 assets/
-│
-├── images/
-├── illustrations/
-├── icons/
-│
 components/
-│
-├── ui/
-├── common/
-├── forms/
-├── feedback/
-├── charts/
-├── layout/
-│
-features/
-│
-├── auth/
-├── dashboard/
-├── inventory/
-├── donation/
-├── request/
-├── profile/
-├── admin/
-├── hospital/
-├── patient/
-├── donor/
-│
-services/
-│
-├── api/
-├── auth/
-│
-hooks/
-│
-contexts/
-│
 constants/
-│
-utils/
-│
-styles/
-│
+contexts/
+features/
+hooks/
+layouts/
 pages/
-│
-config/
-│
-types/
-│
+providers/
+services/
+styles/
+utils/
+
 App.jsx
 main.jsx
 ```
 
-Every folder must have a single responsibility.
+Each directory has a single responsibility.
 
 ---
 
-## Feature-Based Development
+## Feature Organization
 
-Each feature owns its own components, hooks, services, and pages where appropriate.
+Each feature owns its:
+
+- Components
+- Pages
+- Services
+- Hooks (when required)
 
 Example
 
+```text
 features/
 
 auth/
+analytics/
+donations/
+home/
+inventory/
+profile/
+requests/
+users/
+```
 
-* pages
-* hooks
-* services
-* validation
+Feature-specific code should remain inside its feature directory.
 
-Avoid placing feature-specific code inside global folders unless it is reused across features.
+Reusable logic belongs inside shared folders.
+
+---
+
+## Component Architecture
+
+Components are organized into reusable categories.
+
+```text
+components/
+
+dashboard/
+feedback/
+public/
+shared/
+ui/
+```
+
+The UI library contains reusable building blocks including:
+
+- Buttons
+- Inputs
+- Cards
+- Badges
+- Modals
+- Loaders
+- Skeletons
+- Empty States
+
+Avoid creating duplicate UI components.
+
+---
+
+## Layout Architecture
+
+BloodLink currently contains three primary layouts.
+
+## Public Layout
+
+Landing page
+
+Navigation
+
+Marketing sections
+
+---
+
+## Authentication Layout
+
+Login
+
+Register
+
+Forgot Password
+
+Reset Password
+
+---
+
+## Dashboard Layout
+
+Sidebar
+
+Navbar
+
+Scrollable Content
+
+Responsive Navigation
 
 ---
 
 ## Routing Strategy
 
-Use React Router DOM.
+Routes are grouped by responsibility.
 
-Organize routes by layout and access level.
+Categories include:
 
-Examples
+- Public
+- Authentication
+- Protected
+- Role-Based
+- Error Routes
 
-* Public Routes
-* Authentication Routes
-* Protected Routes
-* Role-Based Routes
-* Error Routes
+Protected routes should always verify authentication before rendering.
 
-Each route should have a single responsibility.
-
-Lazy load major pages.
-
----
-
-## Layout Hierarchy
-
-Public Layout
-
-Guest pages
-
-Authentication Layout
-
-Login
-Register
-Forgot Password
-Reset Password
-
-Dashboard Layout
-
-Sidebar
-
-Top Navbar
-
-Content
-
-Footer (if applicable)
-
-Error Layout
-
-404
-
-500
-
-Unauthorized
-
----
-
-## Authentication Flow
-
-Backend already manages authentication.
-
-Frontend responsibilities:
-
-* Store tokens securely
-* Refresh authentication state
-* Redirect unauthenticated users
-* Protect routes
-* Handle logout gracefully
-* Show loading while verifying session
-
-Never implement authentication business logic in the frontend.
-
----
-
-## API Layer
-
-Never call Axios directly inside random components.
-
-Structure
-
-services/
-
-api/
-
-Example
-
-auth.api.js
-
-inventory.api.js
-
-request.api.js
-
-donation.api.js
-
-payment.api.js
-
-analytics.api.js
-
-Each file contains only API communication.
-
-Business decisions remain on the backend.
-
----
-
-## Axios Configuration
-
-Single Axios instance.
-
-Responsibilities
-
-* Base URL
-* Credentials
-* Authorization header
-* Token refresh
-* Response interceptor
-* Error interceptor
-
-Never duplicate Axios configuration.
-
----
-
-## Environment Variables
-
-Never hardcode.
-
-Use
-
-VITE_API_URL
-
-VITE_APP_NAME
-
-VITE_RAZORPAY_KEY_ID
-
-Future configuration should also use environment variables.
+Role-based authorization is enforced by both frontend navigation and backend APIs.
 
 ---
 
 ## State Management
 
-Use Context API.
+Global state is managed through Context API.
 
-Separate contexts by responsibility.
+Current contexts include:
 
-Examples
+- Auth Context
+- Theme Context
+- Sidebar Context
 
-* Auth Context
-* Theme Context
-* Loading Context
-
-Avoid placing unrelated state into one large context.
-
-Use local component state whenever global state is unnecessary.
+Component state should remain local whenever global state is unnecessary.
 
 ---
 
-## Form Strategy
+## API Layer
 
-Use React Hook Form.
+Every backend request passes through the centralized API layer.
 
-Validation
+```text
+services/
 
-Frontend
+api/
 
-* Required fields
-* Input format
-* User-friendly feedback
+analytics.api.js
+auth.api.js
+donation.api.js
+payment.api.js
+request.api.js
+user.api.js
+```
 
-Backend
-
-* Final validation
-* Security
-* Business rules
-
-Never rely solely on frontend validation.
+Business logic should never be implemented inside API files.
 
 ---
 
-## Error Handling
+## Axios Configuration
 
-Every API request must handle
+A single Axios instance manages:
 
-Loading
+- Base URL
+- Credentials
+- Authorization Headers
+- Access Token
+- Refresh Token
+- Request Interceptors
+- Response Interceptors
+- Error Handling
 
-Success
+Never create additional Axios instances.
 
-Failure
+---
 
-Unauthorized
+## Authentication Flow
 
-Network Error
+The backend owns authentication.
 
-Unexpected Error
+Frontend responsibilities include:
 
-Display user-friendly messages.
+- Persist authenticated user
+- Protect routes
+- Redirect unauthorized users
+- Handle logout
+- Refresh authentication state
+- Display loading while verifying sessions
 
-Never expose backend stack traces.
+Business rules remain on the backend.
+
+---
+
+## Environment Variables
+
+Never hardcode configuration.
+
+Current variables include:
+
+```text
+VITE_API_URL
+VITE_RAZORPAY_KEY_ID
+```
+
+Future configuration should also use environment variables.
+
+---
+
+## Form Handling
+
+React Hook Form is the standard.
+
+Frontend validation includes:
+
+- Required Fields
+- Input Formats
+- Password Confirmation
+- User Feedback
+
+Backend validation remains the source of truth.
 
 ---
 
 ## Loading Strategy
 
-Provide visual feedback for every asynchronous operation.
+Every asynchronous operation should provide visual feedback.
 
-Examples
+Available components include:
 
-* Skeletons
-* Button loading
-* Table loading
-* Dashboard loading
-* Route loading
+- Page Loader
+- Button Loader
+- Dashboard Skeleton
+- Table Skeleton
+- Profile Skeleton
 
-Avoid blank screens.
+Avoid blank screens whenever possible.
+
+---
+
+## Error Handling
+
+Every API request should support:
+
+- Loading
+- Success
+- Error
+- Unauthorized
+- Network Failure
+- Empty State
+
+Backend errors should always be converted into user-friendly messages.
+
+Never expose technical implementation details.
 
 ---
 
 ## Reusable Components
 
-Before creating a new component ask:
+Before creating a component ask:
 
-Can an existing component solve this?
+> Can an existing component solve this problem?
 
-If yes
+If yes:
 
 Reuse it.
 
-Never duplicate components with minor styling differences.
+If not:
 
-Use variants instead.
-
----
-
-## Naming Conventions
-
-Components
-
-PascalCase
-
-Hooks
-
-useSomething
-
-Contexts
-
-SomethingContext
-
-Utilities
-
-camelCase
-
-Constants
-
-UPPER_SNAKE_CASE
-
-Files
-
-Consistent with exports.
+Build a reusable solution rather than a page-specific implementation.
 
 ---
 
-## Styling Rules
+## Styling Guidelines
 
-Use Tailwind CSS only.
+BloodLink uses Tailwind CSS exclusively.
 
-Avoid inline styles unless dynamic values require them.
+Guidelines:
 
-Keep utility classes readable.
-
-Extract repeated patterns into reusable components or utility functions.
-
----
-
-## Icons
-
-Primary
-
-Lucide React
-
-Secondary
-
-React Icons
-
-Avoid mixing multiple icon styles within the same interface.
+- Avoid inline styles.
+- Prefer utility classes.
+- Extract repeated UI into reusable components.
+- Maintain consistent spacing.
+- Support both themes.
 
 ---
 
-## Dark Mode
+## Icon System
 
-Support:
+Primary Library
 
-* Light
-* Dark
-* System
+- Lucide React
 
-Persist user preference.
+Guidelines
 
-Every new component must work in both themes.
+- Consistent icon sizes
+- Consistent spacing
+- Meaningful icons only
+
+Avoid mixing icon libraries unnecessarily.
+
+---
+
+## Theme Support
+
+Every component must support:
+
+- Light Theme
+- Dark Theme
+- System Preference
+
+Theme persistence is handled through Local Storage.
+
+All new components must be verified in both themes before merging.
 
 ---
 
 ## Performance
 
-Use:
+BloodLink prioritizes responsiveness and efficient rendering.
 
-* Route lazy loading
-* Dynamic imports where appropriate
-* Memoization only when beneficial
-* Optimized rendering
-* Efficient list keys
-* Debounced search inputs
+Engineering practices include:
 
-Do not optimize prematurely, but avoid obvious inefficiencies.
+- Feature-Based Architecture
+- Reusable Components
+- Centralized API Layer
+- Optimized State Management
+- Parallel API Requests
+- Lazy Rendering where appropriate
+- Efficient Component Updates
+
+Avoid:
+
+- Duplicate API calls
+- Unnecessary re-renders
+- Heavy animations
+- Large monolithic components
+- Business logic inside UI components
+
+Performance optimizations should improve maintainability rather than increase complexity.
 
 ---
 
 ## Accessibility
 
-Use semantic HTML.
+BloodLink follows accessibility-first engineering principles.
 
-Support keyboard navigation.
+Every component should support:
 
-Provide ARIA attributes where needed.
+- Semantic HTML
+- Keyboard Navigation
+- Focus Visibility
+- Proper Form Labels
+- Sufficient Color Contrast
+- Screen Reader Compatibility
+- Responsive Touch Targets
 
-Maintain sufficient color contrast.
-
-Ensure focus visibility.
+Accessibility should be verified before considering any feature complete.
 
 ---
 
-## Security
+## Security Guidelines
 
-Never trust frontend validation.
+Frontend security complements backend security.
 
-Never expose secrets.
+General rules:
 
-Never hardcode API URLs.
+- Never trust frontend validation.
+- Never expose secrets.
+- Never hardcode API URLs.
+- Never expose backend implementation details.
+- Sanitize user-facing content when appropriate.
+- Protect authenticated routes.
+- Hide unauthorized actions in the UI.
 
-Never expose internal backend implementation.
+All business validation remains the responsibility of the backend.
 
-Always sanitize user-facing content where appropriate.
+---
+
+## Responsive Design
+
+BloodLink follows a mobile-first approach.
+
+Supported breakpoints:
+
+| Device | Width |
+| --------- | ------- |
+| Mobile | 0–639px |
+| Small Tablet | ≥640px |
+| Tablet | ≥768px |
+| Laptop | ≥1024px |
+| Desktop | ≥1280px |
+| Large Desktop | ≥1536px |
+
+Every page should remain functional and visually consistent across supported screen sizes.
+
+---
+
+## Code Quality Standards
+
+Every contribution should satisfy the following requirements.
+
+## Components
+
+- Single Responsibility
+- Reusable
+- Responsive
+- Theme Compatible
+- Accessible
+
+---
+
+## API Standards
+
+- Centralized
+- Typed Response Structure
+- Error Handling
+- Loading Support
+
+---
+
+## Styling Standards
+
+- Tailwind CSS Only
+- No Hardcoded Colors
+- Consistent Spacing
+- Shared UI Components
+
+---
+
+## Project
+
+- Clean Folder Structure
+- No Dead Code
+- No Commented-Out Code
+- No Console Logs
+- ESLint Clean
+- Production Build Successful
 
 ---
 
 ## Git Workflow
 
-Use focused commits.
+Keep commits focused and meaningful.
 
-Examples
+Examples:
 
-feat: add authentication layout
+```text
+feat: implement request approval workflow
 
-feat: implement login form
+feat: add reusable dashboard components
 
-style: refine dashboard cards
+fix: resolve dynamic processing fee calculation
 
-fix: resolve protected route redirect
+refactor: improve sidebar responsiveness
 
-refactor: extract reusable table component
+style: polish authentication pages
 
-Avoid large "everything" commits.
+docs: update project documentation
+```
+
+Avoid unrelated changes within the same commit.
 
 ---
 
 ## Testing Checklist
 
-Before merging a feature:
+Before completing a feature verify:
 
-* API works
-* Loading state
-* Error state
-* Empty state
-* Dark mode
-* Responsive
-* Accessibility
-* No unused code
+## Functionality
+
+- API Integration
+- Loading State
+- Success State
+- Error State
+- Empty State
+
+---
+
+## UI
+
+- Responsive Layout
+- Light Theme
+- Dark Theme
+- Navigation
+- Typography
+- Component Consistency
+
+---
+
+## Quality
+
+- ESLint Pass
+- Production Build Pass
+- No Unused Code
+- No Hardcoded Values
+- No Visual Regressions
 
 ---
 
 ## Deployment Checklist
 
-Before deployment:
+Before deployment ensure:
 
-* Environment variables configured
-* Production API URL updated
-* Build passes
-* Lint passes
-* No debug code
-* No hardcoded values
-* Assets optimized
-* Routes tested
-* Authentication verified
+## Frontend
+
+- Environment Variables Configured
+- Production API URL Updated
+- Razorpay Key Configured
+- Build Successful
+- Assets Optimized
+- Routes Verified
+- Authentication Verified
+- Payment Flow Tested
+
+---
+
+## Backend
+
+- MongoDB Connected
+- Environment Variables Configured
+- Razorpay Configured
+- Email Service Configured
+- Production CORS Updated
+- APIs Tested
+
+---
+
+## Final Verification
+
+- Landing Page
+- Authentication
+- Admin
+- Donor
+- Patient
+- Hospital
+- Dark Mode
+- Responsive Design
+- Analytics
+- Dynamic Pricing
+- Payment Workflow
 
 ---
 
 ## Code Review Checklist
 
-Every pull request or major commit should verify:
+Before merging verify:
 
-* Follows DESIGN.md
-* Follows FRONTEND_GUIDE.md
-* Reuses existing components
-* No duplicated logic
-* Proper error handling
-* Responsive
-* Accessible
-* Clean folder organization
-
----
-
-## Engineering Do's
-
-* Build reusable components.
-* Keep features modular.
-* Separate UI from API calls.
-* Use environment variables.
-* Keep components small.
-* Write readable code.
-* Prefer composition over duplication.
-* Follow the existing folder structure.
-* Keep commits focused.
+- Follows DESIGN.md
+- Follows FRONTEND_GUIDE.md
+- Uses reusable components
+- No duplicated logic
+- Proper error handling
+- Responsive
+- Accessible
+- Theme Compatible
+- Clean folder organization
+- Consistent naming
 
 ---
 
-## Engineering Don'ts
+## Engineering Best Practices
 
-* Do not hardcode API URLs.
-* Do not duplicate Axios instances.
-* Do not duplicate components.
-* Do not mix business logic with presentation.
-* Do not ignore loading or error states.
-* Do not bypass reusable utilities.
-* Do not commit temporary code.
-* Do not ignore responsiveness.
-* Do not leave unused imports or commented code.
+## Do
 
----
-
-## Development Workflow
-
-For every feature:
-
-1. Understand the backend API.
-2. Plan the user flow.
-3. Identify reusable components.
-4. Implement UI.
-5. Connect the API.
-6. Handle loading, success, error, and empty states.
-7. Test responsiveness.
-8. Verify dark mode.
-9. Check accessibility.
-10. Commit with a focused Git message.
-
-Repeat this process for every feature.
+- Build reusable components.
+- Keep features modular.
+- Separate UI from API communication.
+- Use environment variables.
+- Write readable code.
+- Prefer composition over duplication.
+- Keep commits focused.
+- Follow established project conventions.
 
 ---
 
-## Final Engineering Principles
+## Don't
 
-The frontend should remain independent of backend implementation details while consuming backend APIs consistently.
+- Hardcode configuration.
+- Duplicate components.
+- Duplicate Axios instances.
+- Mix business logic with presentation.
+- Ignore loading or error states.
+- Leave unused code.
+- Commit temporary debugging code.
+- Ignore responsiveness.
+- Skip dark mode testing.
 
-Design decisions belong in DESIGN.md.
+---
 
-Engineering decisions belong in FRONTEND_GUIDE.md.
+## Standard Development Workflow
 
-Every screen should be predictable.
+Every feature should follow the same workflow.
 
-Every component should be reusable.
+```text
+Understand Requirement
 
-Every API interaction should be centralized.
+↓
 
-Every feature should follow the same development workflow.
+Review Backend API
 
-The goal is not just to build a working frontend, but to build one that is clean, maintainable, scalable, and production-ready.
+↓
+
+Plan User Flow
+
+↓
+
+Identify Reusable Components
+
+↓
+
+Build UI
+
+↓
+
+Integrate API
+
+↓
+
+Handle Loading & Errors
+
+↓
+
+Verify Dark Mode
+
+↓
+
+Verify Responsiveness
+
+↓
+
+Run Lint & Build
+
+↓
+
+Commit Changes
+```
+
+Consistency across features is more valuable than individual implementation preferences.
+
+---
+
+## Engineering Principles
+
+The frontend is designed to remain scalable as the application grows.
+
+Core principles include:
+
+- Separation of Concerns
+- Reusability
+- Predictability
+- Maintainability
+- Accessibility
+- Performance
+- Consistency
+
+Every engineering decision should reinforce these principles.
+
+---
+
+## Document Information
+
+| Property | Value |
+| ---------- | ------- |
+| Project | BloodLink |
+| Document | Frontend Engineering Guide |
+| Version | 2.0.0 |
+| Status | Production Ready |
+| Framework | React 19 |
+| Build Tool | Vite |
+| Styling | Tailwind CSS |
+| Routing | React Router DOM |
+| API | Axios |
+| Forms | React Hook Form |
+| Charts | Recharts |
+| Architecture | Feature-Based |
+| Theme | Light / Dark / System |
+| Last Updated | Final Release (v1.0.0) |
+
+---
+
+## Final Notes
+
+This document defines the engineering standards for the BloodLink frontend.
+
+Every future contribution should:
+
+- Follow the existing architecture.
+- Reuse established components.
+- Maintain design consistency.
+- Preserve accessibility.
+- Support responsive layouts.
+- Respect dark mode.
+- Keep API communication centralized.
+
+Following these standards ensures BloodLink remains clean, scalable, maintainable, and production-ready throughout its future development.
