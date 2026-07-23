@@ -1,4 +1,4 @@
-import Brevo from "@getbrevo/brevo";
+import * as Brevo from "@getbrevo/brevo";
 
 const apiInstance = new Brevo.TransactionalEmailsApi();
 
@@ -11,8 +11,8 @@ const sendEmail = async ({ to, subject, html }) => {
   const email = new Brevo.SendSmtpEmail();
 
   email.sender = {
-    email: process.env.MAIL_FROM,
     name: "BloodLink",
+    email: process.env.MAIL_FROM,
   };
 
   email.to = [
