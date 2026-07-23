@@ -1,28 +1,30 @@
-import nodemailer from "nodemailer";
-import ApiError from "./ApiError.js";
+import Brevo from "@getbrevo/brevo";
 
-const transporter = nodemailer.createTransport({
-  host: process.env.MAIL_HOST,
-  port: Number(process.env.MAIL_PORT),
-  secure: false,
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
-  },
-});
+const apiInstance = new Brevo.TransactionalEmailsApi();
+
+apiInstance.setApiKey(
+  Brevo.TransactionalEmailsApiApiKeys.apiKey,
+  process.env.BREVO_API_KEY,
+);
 
 const sendEmail = async ({ to, subject, html }) => {
-  try {
-    await transporter.sendMail({
-      from: `"BloodLink" <${process.env.MAIL_FROM}>`,
-      to,
-      subject,
-      html,
-    });
-  } catch (error) {
-    console.error(error);
-    throw new ApiError(500, "Failed to send email");
-  }
+  const email = new Brevo.SendSmtpEmail();
+
+  email.sender = {
+    email: process.env.MAIL_FROM,
+    name: "BloodLink",
+  };
+
+  email.to = [
+    {
+      email: to,
+    },
+  ];
+
+  email.subject = subject;
+  email.htmlContent = html;
+
+  await apiInstance.sendTransacEmail(email);
 };
 
 export default sendEmail;
